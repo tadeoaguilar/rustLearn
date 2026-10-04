@@ -1,0 +1,12 @@
+[package]
+name = "m05-error-handling-solution"
+description = "Reference solution for 05-error-handling"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+rand.workspace = true
+thiserror.workspace = true
+anyhow.workspace = true

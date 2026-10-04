@@ -153,6 +153,28 @@ This phase introduces you to Rust's fundamental concepts, including its unique o
 
 ---
 
+## Running This Phase
+
+Every module has an `exercise/` crate (your code), a `solution/` crate and a
+`tests/` crate. From the repository root:
+
+```bash
+cargo run  -p m03-ownership-borrowing-solution -- all            # a solution
+cargo run  -p m03-ownership-borrowing -- 1                       # your code
+cargo test -p m03-ownership-borrowing-tests --features mine      # test your code
+```
+
+| Module | Packages | Tests |
+|---|---|---|
+| 01 · Getting Started | `m01-getting-started[-solution\|-tests]` | 15 |
+| 02 · Basic Syntax | `m02-basic-syntax[-solution\|-tests]` | 29 |
+| 03 · Ownership & Borrowing | `m03-ownership-borrowing[-solution\|-tests]` | 21 |
+| 04 · Structs & Enums | `m04-structs-enums[-solution\|-tests]` | 25 |
+| 05 · Error Handling | `m05-error-handling[-solution\|-tests]` | 30 |
+
+Each module's `GETTING_STARTED.md` has the full command list, and its
+`README.md` lists the mistakes found in that module's `exercises.md`.
+
 ## Phase Completion Checklist
 
 - [ ] Can write and run Rust programs confidently

@@ -1,0 +1,11 @@
+[package]
+name = "m06-traits-generics"
+description = "YOUR WORKSPACE for 06-traits-generics"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# Doc examples would run against todo!() bodies, so they are off here.
+[lib]
+doctest = false

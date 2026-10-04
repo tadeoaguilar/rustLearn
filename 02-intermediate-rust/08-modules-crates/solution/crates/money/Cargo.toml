@@ -1,0 +1,15 @@
+[package]
+name = "m08-money-solution"
+description = "Exercise 5: money handling, extracted into its own crate"
+# Everything below is inherited from [workspace.package] in the root Cargo.toml.
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# Off by default: crates that don't need serde don't pay for it.
+serde = ["dep:serde"]
+
+[dependencies]
+serde = { workspace = true, optional = true }

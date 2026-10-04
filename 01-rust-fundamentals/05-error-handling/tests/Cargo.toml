@@ -1,0 +1,19 @@
+[package]
+name = "m05-error-handling-tests"
+description = "Tests for 05-error-handling -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m05-error-handling-tests                   -> tests ../solution
+# cargo test -p m05-error-handling-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m05-error-handling = { path = "../exercise" }
+m05-error-handling-solution = { path = "../solution" }
+
+[dev-dependencies]
+tempfile.workspace = true

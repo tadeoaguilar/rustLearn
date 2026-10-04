@@ -1,0 +1,11 @@
+[package]
+name = "m04-structs-enums"
+description = "YOUR WORKSPACE for 04-structs-enums"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# Doc examples would run against todo!() bodies, so they are off here.
+[lib]
+doctest = false

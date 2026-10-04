@@ -1,0 +1,95 @@
+//! Exercise 4: Atomics and Memory Ordering.
+//!
+//! | Ordering  | Guarantees                                                     | Use for |
+//! |-----------|----------------------------------------------------------------|---------|
+//! | `Relaxed` | the operation itself is atomic; no ordering with other memory | counters, statistics |
+//! | `Release` (store) + `Acquire` (load) | everything written before the Release is visible after the Acquire that reads it | locks, publishing data |
+//! | `SeqCst`  | Acquire/Release + one global order of all SeqCst operations   | when in doubt; rarely *needed* |
+
+use std::cell::UnsafeCell;
+use std::hint;
+use std::ops::{Deref, DerefMut};
+use std::sync::atomic::{AtomicBool, AtomicU64, AtomicUsize, Ordering};
+use std::sync::{Arc, Mutex};
+use std::thread;
+use std::time::{Duration, Instant};
+
+pub const THREADS: usize = 8;
+pub const PER_THREAD: usize = 125_000; // 8 x 125,000 = 1,000,000
+
+pub fn count_with_mutex() -> (usize, Duration) {
+    todo!("Exercise 4")
+}
+
+/// `Relaxed` is enough: nobody reads the count until every thread is joined,
+/// and `join` itself synchronises.
+pub fn count_with_atomic() -> (usize, Duration) {
+    todo!("Exercise 4")
+}
+
+/// The fastest by far: no sharing at all until the end.
+pub fn count_with_local_sums() -> (usize, Duration) {
+    todo!("Exercise 4")
+}
+
+/// A compare-and-swap loop: read, compute, try to install; if another thread
+/// changed the value meanwhile, `compare_exchange_weak` fails and hands back
+/// the new current value to retry with. (`fetch_max` does this for you.)
+pub fn atomic_max(target: &AtomicU64, value: u64) -> u64 {
+    todo!("Exercise 4")
+}
+
+/// A spin lock: a bool "locked" flag guarding a value in an UnsafeCell.
+pub struct SpinLock<T> {
+    locked: AtomicBool,
+    value: UnsafeCell<T>,
+}
+
+// SAFETY: the lock guarantees only one thread at a time gets a &mut T, so
+// sharing &SpinLock across threads is fine as long as T may be *sent*.
+unsafe impl<T: Send> Sync for SpinLock<T> {}
+
+impl<T> SpinLock<T> {
+    pub const fn new(value: T) -> Self {
+        todo!()
+    }
+
+    /// Acquire: everything the previous holder wrote before its Release
+    /// unlock is visible to us. With Relaxed, we could take the lock and
+    /// still see a stale value -- the lock would protect nothing.
+    pub fn lock(&self) -> SpinGuard<'_, T> {
+        todo!("Exercise 4")
+    }
+
+    pub fn into_inner(self) -> T {
+        todo!("Exercise 4")
+    }
+}
+
+pub struct SpinGuard<'a, T> {
+    lock: &'a SpinLock<T>,
+}
+
+impl<T> Deref for SpinGuard<'_, T> {
+    type Target = T;
+    fn deref(&self) -> &T {
+        todo!("Exercise 4")
+    }
+}
+
+impl<T> DerefMut for SpinGuard<'_, T> {
+    fn deref_mut(&mut self) -> &mut T {
+        todo!("Exercise 4")
+    }
+}
+
+impl<T> Drop for SpinGuard<'_, T> {
+    /// Release: publishes our writes to the next thread that Acquires.
+    fn drop(&mut self) {
+        // TODO Exercise 4: a todo!() here could abort the test run, so this is empty.
+    }
+}
+
+pub fn run() {
+    todo!("Exercise 4")
+}

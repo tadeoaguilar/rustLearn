@@ -1,0 +1,15 @@
+[package]
+name = "m14-unsafe-ffi"
+description = "YOUR WORKSPACE for 14-unsafe-ffi"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+build = "build.rs"
+
+# Doc examples would run against todo!() bodies, so they are off here.
+[lib]
+doctest = false
+
+[build-dependencies]
+cc.workspace = true

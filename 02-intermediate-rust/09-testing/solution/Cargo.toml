@@ -1,0 +1,17 @@
+[package]
+name = "m09-testing-solution"
+description = "Reference solution for 09-testing: the fixed library and a complete test suite"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dev-dependencies]
+proptest.workspace = true
+mockall.workspace = true
+criterion.workspace = true
+
+# Exercise 7. harness = false: criterion provides its own main().
+[[bench]]
+name = "words"
+harness = false

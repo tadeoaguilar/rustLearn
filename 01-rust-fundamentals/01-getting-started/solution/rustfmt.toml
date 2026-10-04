@@ -1,0 +1,6 @@
+# Exercise 5: rustfmt configuration. `cargo fmt` picks this up automatically.
+# Only stable options are used, so this works without a nightly toolchain.
+edition = "2024"
+max_width = 100
+use_field_init_shorthand = true
+use_try_shorthand = true

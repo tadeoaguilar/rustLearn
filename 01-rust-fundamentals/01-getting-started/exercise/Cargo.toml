@@ -1,0 +1,16 @@
+[package]
+name = "m01-getting-started"
+description = "YOUR WORKSPACE for 01-getting-started"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# Doc examples would run against todo!() bodies, so they are off here.
+[lib]
+doctest = false
+
+[dependencies]
+rand.workspace = true
+
+# Exercise 5: add the [lints.rust] and [lints.clippy] tables here.

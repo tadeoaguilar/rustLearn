@@ -1,0 +1,11 @@
+# Rust build output
+/target/
+**/*.rs.bk
+
+# Personal progress file (copied from PROGRESS.template.md)
+PROGRESS.md
+
+# OS / editors
+.DS_Store
+.idea/
+*.swp

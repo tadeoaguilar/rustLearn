@@ -1,0 +1,16 @@
+[package]
+name = "m01-getting-started-tests"
+description = "Tests for 01-getting-started -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m01-getting-started-tests                   -> tests ../solution
+# cargo test -p m01-getting-started-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m01-getting-started = { path = "../exercise" }
+m01-getting-started-solution = { path = "../solution" }

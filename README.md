@@ -2,6 +2,64 @@
 
 A comprehensive, structured learning path to master Rust programming, from fundamentals to advanced topics including web development, cloud-native applications, and Solana blockchain development.
 
+## Current Status
+
+Phases 1–3 have exercises, a reference solution and tests for every module.
+Phases 4–8 are topic outlines (each phase README lists its modules).
+
+| Module | Exercises | Runnable code | Status |
+|---|---|---|---|
+| 01 · Getting Started | ✅ | ✅ | **Ready** — 15 tests |
+| 02 · Basic Syntax | ✅ | ✅ | **Ready** — 29 tests |
+| 03 · Ownership & Borrowing | ✅ | ✅ | **Ready** — 21 tests |
+| 04 · Structs & Enums | ✅ | ✅ | **Ready** — 25 tests |
+| 05 · Error Handling | ✅ | ✅ | **Ready** — 30 tests |
+| 06 · Traits & Generics | ✅ | ✅ | **Ready** — 18 tests |
+| 07 · Collections & Iterators | ✅ | ✅ | **Ready** — 22 tests |
+| 08 · Modules & Crates | ✅ | ✅ | **Ready** — 13 tests + 8 doc tests |
+| 09 · Testing | ✅ | ✅ | **Ready** — 14 acceptance + 47 solution tests |
+| 10 · Smart Pointers | ✅ | ✅ | **Ready** — 21 tests |
+| 11 · Advanced Lifetimes | ✅ | ✅ | **Ready** — 24 tests |
+| 12 · Async/Await | ✅ | ✅ | **Ready** — 20 tests |
+| 13 · Macros | ✅ | ✅ | **Ready** — 30 tests + 12 doc tests |
+| 14 · Unsafe & FFI | ✅ | ✅ | **Ready** — 17 tests (needs a C compiler) |
+| 15 · Concurrency | ✅ | ✅ | **Ready** — 25 tests |
+| 16–40 · Phases 4–8 | outlines | — | Planned |
+| CRUD API project | ✅ | ✅ | Standalone app in `10-crud-api-project/` |
+
+`cargo test` at the repository root runs **394 tests** (unit, integration and
+doc tests across all three phases) against the reference solutions. Nothing
+needs Docker or a network connection; module 14 needs a C compiler, which
+every Rust install on macOS/Linux already has or can get with one command.
+
+## How the Code Is Organised
+
+The repository root is a single Cargo workspace. Each module in Phases 1–3
+looks like this:
+
+```
+01-rust-fundamentals/03-ownership-borrowing/
+├── README.md            # concepts, pitfalls, and notes on mistakes found in exercises.md
+├── exercises.md         # the exercises
+├── GETTING_STARTED.md   # every command for this module
+├── exercise/            # YOUR crate: signatures in place, bodies are todo!()
+├── solution/            # the reference solution (+ ANSWERS.md for written questions)
+└── tests/               # tests that run against the solution OR your exercise crate
+```
+
+Package names follow the folder: `m03-ownership-borrowing` (yours),
+`m03-ownership-borrowing-solution`, `m03-ownership-borrowing-tests`.
+
+```bash
+cargo run  -p m03-ownership-borrowing -- 1                      # run your exercise 1
+cargo test -p m03-ownership-borrowing-tests --features mine     # test YOUR code
+cargo run  -p m03-ownership-borrowing-solution -- all           # run the solution
+cargo test -p m03-ownership-borrowing-tests                     # test the solution
+cargo test                                                      # everything, against the solutions
+```
+
+[GETTING_STARTED.md](GETTING_STARTED.md) explains the workflow in detail.
+
 ## Learning Path Overview
 
 This repository is organized into 8 main sections with 40+ focused modules, designed to take you from a complete beginner to a Rust expert.
@@ -191,7 +249,7 @@ Mark modules as you complete them and note key learnings.
 
 ## Next Steps
 
-1. Start with [01-rust-fundamentals/01-getting-started](01-rust-fundamentals/01-getting-started/)
+1. Start with [01-rust-fundamentals/01-getting-started](01-rust-fundamentals/01-getting-started/) — read its `GETTING_STARTED.md`
 2. Follow the modules in order within each phase
 3. Complete exercises and projects for each module
 4. Build increasingly complex projects in [09-projects](09-projects/)

@@ -1,0 +1,16 @@
+[package]
+name = "m04-structs-enums-tests"
+description = "Tests for 04-structs-enums -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m04-structs-enums-tests                   -> tests ../solution
+# cargo test -p m04-structs-enums-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m04-structs-enums = { path = "../exercise" }
+m04-structs-enums-solution = { path = "../solution" }

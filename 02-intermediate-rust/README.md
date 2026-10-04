@@ -179,6 +179,28 @@ This phase deepens your understanding of Rust's powerful type system, teaches yo
 
 ---
 
+## Running This Phase
+
+Every module has an `exercise/` crate (your code), a `solution/` crate and a
+`tests/` crate. From the repository root:
+
+```bash
+cargo run  -p m06-traits-generics-solution -- all            # a solution
+cargo run  -p m06-traits-generics -- 1                       # your code
+cargo test -p m06-traits-generics-tests --features mine      # test your code
+```
+
+| Module | Packages | Tests |
+|---|---|---|
+| 06 · Traits & Generics | `m06-traits-generics[-solution\|-tests]` | 18 |
+| 07 · Collections & Iterators | `m07-collections-iterators[-solution\|-tests]` | 22 |
+| 08 · Modules & Crates | `m08-modules-crates[-solution\|-tests]`, `m08-money[-solution]` | 13 + 8 doc |
+| 09 · Testing | `m09-testing[-solution\|-tests]` | 14 acceptance + 47 in the solution |
+| 10 · Smart Pointers | `m10-smart-pointers[-solution\|-tests]` | 21 |
+
+Modules 08, 09 and 10 had no `exercises.md` originally; theirs were written to
+match the others. Each module's `GETTING_STARTED.md` has the full command list.
+
 ## Phase Completion Checklist
 
 - [ ] Can write and use generic types and functions

@@ -1,0 +1,17 @@
+[package]
+name = "m13-macros-derive-solution"
+description = "Procedural macros for 13-macros: Describe, Builder, #[timed]"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# A proc-macro crate is compiled for the *host* and loaded by the compiler.
+# It can export only procedural macros -- no functions, types or traits.
+[lib]
+proc-macro = true
+
+[dependencies]
+syn.workspace = true
+quote.workspace = true
+proc-macro2.workspace = true

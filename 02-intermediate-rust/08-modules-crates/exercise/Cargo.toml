@@ -1,0 +1,25 @@
+[package]
+name = "m08-modules-crates"
+description = "YOUR WORKSPACE for 08-modules-crates: the bookstore library"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# Doc examples would run against todo!() bodies, so they are off for now.
+# Exercise 6: delete these two lines once your implementation is complete.
+[lib]
+doctest = false
+
+# Exercise 4: the features are declared already so the tests can enable them.
+[features]
+default = ["discounts"]
+discounts = []
+json = ["dep:serde", "dep:serde_json", "m08-money/serde"]
+report = ["discounts"]
+
+[dependencies]
+# Exercise 5: the money crate lives in crates/money.
+m08-money = { path = "crates/money" }
+serde = { workspace = true, optional = true }
+serde_json = { workspace = true, optional = true }

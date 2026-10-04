@@ -1,0 +1,11 @@
+[package]
+name = "m15-concurrency-solution"
+description = "Reference solution for 15-concurrency"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+rayon.workspace = true
+crossbeam.workspace = true

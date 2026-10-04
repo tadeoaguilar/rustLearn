@@ -1,0 +1,16 @@
+[package]
+name = "m03-ownership-borrowing-tests"
+description = "Tests for 03-ownership-borrowing -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m03-ownership-borrowing-tests                   -> tests ../solution
+# cargo test -p m03-ownership-borrowing-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m03-ownership-borrowing = { path = "../exercise" }
+m03-ownership-borrowing-solution = { path = "../solution" }

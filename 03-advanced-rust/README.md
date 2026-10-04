@@ -181,6 +181,30 @@ This phase covers advanced Rust topics that enable you to build high-performance
 
 ---
 
+## Running This Phase
+
+Every module has an `exercise/` crate (your code), a `solution/` crate and a
+`tests/` crate. From the repository root:
+
+```bash
+cargo run  -p m12-async-await-solution -- all            # a solution
+cargo run  -p m12-async-await -- 1                       # your code
+cargo test -p m12-async-await-tests --features mine      # test your code
+```
+
+| Module | Packages | Tests |
+|---|---|---|
+| 11 · Advanced Lifetimes | `m11-lifetimes-advanced[-solution\|-tests]` | 24 (18 + 6 signature checks) |
+| 12 · Async/Await | `m12-async-await[-solution\|-tests]` | 20 |
+| 13 · Macros | `m13-macros[-solution\|-tests]`, `m13-macros-derive[-solution]` | 30 + 12 doc |
+| 14 · Unsafe & FFI | `m14-unsafe-ffi[-solution\|-tests]` | 17 |
+| 15 · Concurrency | `m15-concurrency[-solution\|-tests]` | 25 |
+
+Modules 11, 13, 14 and 15 had no `exercises.md` originally; theirs were
+written to match the others. Some test crates have extra switches — module
+11's `signatures` feature, module 13's per-exercise features — explained in
+each module's `GETTING_STARTED.md`. Module 14 needs a C compiler.
+
 ## Phase Completion Checklist
 
 - [ ] Can write async code with Tokio

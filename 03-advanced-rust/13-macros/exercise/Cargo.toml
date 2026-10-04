@@ -1,0 +1,13 @@
+[package]
+name = "m13-macros"
+description = "YOUR WORKSPACE for 13-macros"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[lib]
+doctest = false
+
+[dependencies]
+m13-macros-derive = { path = "derive" }

@@ -4,8 +4,17 @@ This document provides an overview of all exercises across the 40 modules in the
 
 ## Status
 
-✅ **Phase 1: Rust Fundamentals** - Complete (5 modules)
-🔄 **Phase 2-8** - In progress
+Phases 1–3 have exercises **and** runnable code: for every module an
+`exercise/` crate to fill in, a `solution/` crate, and a `tests/` crate that
+checks either one. See [GETTING_STARTED.md](GETTING_STARTED.md) for the
+commands.
+
+| Phase | Exercises | Code + tests |
+|---|---|---|
+| 1 · Rust Fundamentals (01–05) | ✅ | ✅ 120 tests |
+| 2 · Intermediate Rust (06–10) | ✅ | ✅ 88 tests + 47 in module 09's solution + 8 doc tests in module 08 |
+| 3 · Advanced Rust (11–15) | ✅ | ✅ 116 tests + 12 macro doc tests |
+| 4–8 · Specialisations | topic outlines below | — |
 
 ## Phase 1: Rust Fundamentals ✅
 
@@ -66,7 +75,7 @@ This document provides an overview of all exercises across the 40 modules in the
 - ✅ Using thiserror Crate (25 min)
 - ✅ Bonus: Result Combinators (45 min)
 
-## Phase 2: Intermediate Rust 🔄
+## Phase 2: Intermediate Rust ✅
 
 ### 06-traits-generics
 - ✅ Basic Traits (25 min)
@@ -79,82 +88,97 @@ This document provides an overview of all exercises across the 40 modules in the
 - ✅ Bonus: Shape System (90+ min)
 
 ### 07-collections-iterators
-- Iterator basics and adaptors
-- HashMap and BTreeMap
-- Vec operations
-- Custom iterators
-- Closure types (Fn, FnMut, FnOnce)
-- Functional programming patterns
-- Performance considerations
+- ✅ Vector Operations (20 min)
+- ✅ HashMap Basics — word frequency, grouping, LRU cache (30 min)
+- ✅ Iterator Basics (35 min)
+- ✅ Advanced Iterators — fold, scan, zip, flat_map, partition (45 min)
+- ✅ Custom Iterators — range, cycle, primes (60 min)
+- ✅ Closures — Fn, FnMut, FnOnce, composition (35 min)
+- ✅ Bonus: Data Pipeline (90+ min)
 
-### 08-modules-crates
-- Module organization
-- Privacy and pub
-- Use statements
-- Workspace setup
-- Publishing crates
-- Documentation
-- Feature flags
+### 08-modules-crates *(exercises written for this repo)*
+- ✅ Refactor a Large File into Modules (30 min)
+- ✅ Visibility and Encapsulation (40 min)
+- ✅ Re-exports and a Prelude (20 min)
+- ✅ Features and Conditional Compilation (40 min)
+- ✅ A Workspace with Multiple Crates (45 min)
+- ✅ Documentation and Doc Tests (30 min)
+- ✅ Publishing (optional, 30 min)
+- ✅ Bonus: Feature-Gated Inventory Report (45 min)
 
-### 09-testing
-- Unit tests
-- Integration tests
-- Doc tests
-- Test organization
-- Mocking
-- Benchmarking with criterion
-- Coverage tools
+### 09-testing *(exercises written for this repo)*
+- ✅ Unit Tests (30 min)
+- ✅ Testing Errors and Panics (35 min)
+- ✅ Integration Tests and Test Organisation (30 min)
+- ✅ Documentation Tests (25 min)
+- ✅ Mocking with mockall (45 min)
+- ✅ Property-Based Testing with proptest (45 min)
+- ✅ Benchmarking with criterion (30 min)
+- ✅ Bonus: Coverage and the Bowling TDD Kata (60 min)
 
-### 10-smart-pointers
-- Box<T> exercises
-- Rc<T> and Arc<T>
-- RefCell<T> and Mutex<T>
-- Weak<T> for cycles
-- Building data structures (linked list, tree)
-- Interior mutability patterns
+### 10-smart-pointers *(exercises written for this repo)*
+- ✅ Box and Recursive Types (25 min)
+- ✅ A Linked List with Box (60 min)
+- ✅ Deref and Drop (35 min)
+- ✅ Rc and Weak — a Tree with Parent Links (60 min)
+- ✅ Interior Mutability with RefCell and Cell (40 min)
+- ✅ Shared Mutable Graphs with Rc<RefCell<T>> (50 min)
+- ✅ A Thread-Safe Cache with Arc and Mutex (60 min)
+- ✅ Bonus: Cow (30 min)
 
-## Phase 3: Advanced Rust
+## Phase 3: Advanced Rust ✅
 
-### 11-lifetimes-advanced
-- Lifetime annotations
-- Multiple lifetimes
-- Lifetime elision
-- 'static lifetime
-- Higher-ranked trait bounds
-- Struct lifetimes
+### 11-lifetimes-advanced *(exercises written for this repo)*
+- ✅ Annotations and Elision (30 min)
+- ✅ Structs That Borrow (40 min)
+- ✅ A Zero-Copy HTTP Parser (60 min)
+- ✅ Iterators That Borrow (60 min)
+- ✅ 'static and Lifetime Bounds (40 min)
+- ✅ Higher-Ranked Trait Bounds (40 min)
+- ✅ Fix the Lifetime Errors (60 min)
+- ✅ Bonus: StrSplit with Two Lifetimes (60 min)
 
 ### 12-async-await
-- Tokio runtime basics
-- Async functions
-- Futures and Streams
-- select! and join!
-- Async channels
-- Error handling in async
-- Building async applications
+- ✅ Basic Async Functions (20 min)
+- ✅ Concurrent Execution (30 min)
+- ✅ Async File I/O (35 min)
+- ✅ Async HTTP Client (40 min)
+- ✅ Channels (35 min)
+- ✅ Spawning Tasks (40 min)
+- ✅ Async Web Server (60 min)
+- ✅ Streams (45 min)
+- ✅ Bonus: Async Task Queue (90+ min)
 
-### 13-macros
-- macro_rules! basics
-- Declarative macro patterns
-- Procedural macros
-- Derive macros
-- Attribute macros
-- Function-like macros
+### 13-macros *(exercises written for this repo)*
+- ✅ Your First macro_rules! (30 min)
+- ✅ Generating Items (40 min)
+- ✅ Compile-Time Validation (40 min)
+- ✅ A State-Machine DSL (60 min)
+- ✅ Hygiene, $crate and Debugging (30 min)
+- ✅ A Derive Macro (60 min)
+- ✅ A Builder Derive (90 min)
+- ✅ Bonus: An Attribute Macro (45 min)
 
-### 14-unsafe-ffi
-- Unsafe fundamentals
-- Raw pointers
-- FFI basics
-- Using bindgen
-- Safe wrappers
-- Understanding UB
+### 14-unsafe-ffi *(exercises written for this repo)*
+- ✅ Raw Pointers (40 min)
+- ✅ Calling the C Standard Library (40 min)
+- ✅ Bindings to Your Own C Library (60 min)
+- ✅ Calling Rust from C (30 min)
+- ✅ A Safe Abstraction: StackVec (60 min)
+- ✅ A Custom Allocator and an Arena (45 min)
+- ✅ System Libraries (30 min)
+- ✅ Bonus: Hunting UB with Miri (45 min)
 
-### 15-concurrency
-- Thread creation
-- Message passing
-- Shared state
-- Atomic types
-- Rayon for parallelism
-- Lock-free structures
+### 15-concurrency *(exercises written for this repo)*
+- ✅ Threads and Scoped Threads (30 min)
+- ✅ Message Passing (40 min)
+- ✅ Shared State: Mutex, RwLock, Condvar (60 min)
+- ✅ Atomics and Memory Ordering (45 min)
+- ✅ A Thread Pool (60 min)
+- ✅ Data Parallelism with Rayon (40 min)
+- ✅ A Concurrent Web Crawler (90 min)
+- ✅ A Lock-Free Stack (90 min)
+- ✅ Bonus: Dining Philosophers (45 min)
 
 ## Phase 4: Web Development
 

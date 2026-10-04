@@ -1,0 +1,16 @@
+[package]
+name = "m10-smart-pointers-tests"
+description = "Tests for 10-smart-pointers -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m10-smart-pointers-tests                   -> tests ../solution
+# cargo test -p m10-smart-pointers-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m10-smart-pointers = { path = "../exercise" }
+m10-smart-pointers-solution = { path = "../solution" }

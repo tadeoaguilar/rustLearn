@@ -1,0 +1,20 @@
+[package]
+name = "m11-lifetimes-advanced-tests"
+description = "Tests for 11-lifetimes-advanced -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m11-lifetimes-advanced-tests                   -> tests ../solution
+# cargo test -p m11-lifetimes-advanced-tests --features mine   -> tests ../exercise (your code)
+mine = []
+# Lifetime *signature* checks. They only compile if your lifetimes are loose
+# enough, so they're kept separate from the behaviour tests:
+#   cargo test -p m11-lifetimes-advanced-tests --features mine,signatures
+signatures = []
+
+[dependencies]
+m11-lifetimes-advanced = { path = "../exercise" }
+m11-lifetimes-advanced-solution = { path = "../solution" }

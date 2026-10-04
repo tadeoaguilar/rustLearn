@@ -1,0 +1,19 @@
+[package]
+name = "m01-getting-started-solution"
+description = "Reference solution for 01-getting-started"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+# Exercise 1 + Bonus: build.rs captures the compiler version and build time.
+build = "build.rs"
+
+[dependencies]
+rand.workspace = true
+
+# Exercise 5: lints configured in Cargo.toml instead of scattered #![deny] attributes.
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+enum_glob_use = "deny"

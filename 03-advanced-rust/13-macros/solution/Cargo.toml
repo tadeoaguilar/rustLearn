@@ -1,0 +1,10 @@
+[package]
+name = "m13-macros-solution"
+description = "Reference solution for 13-macros"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+m13-macros-derive-solution = { path = "derive" }

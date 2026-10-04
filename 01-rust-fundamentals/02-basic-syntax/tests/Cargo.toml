@@ -1,0 +1,16 @@
+[package]
+name = "m02-basic-syntax-tests"
+description = "Tests for 02-basic-syntax -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m02-basic-syntax-tests                   -> tests ../solution
+# cargo test -p m02-basic-syntax-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m02-basic-syntax = { path = "../exercise" }
+m02-basic-syntax-solution = { path = "../solution" }

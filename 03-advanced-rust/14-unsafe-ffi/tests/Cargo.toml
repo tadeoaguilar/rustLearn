@@ -1,0 +1,16 @@
+[package]
+name = "m14-unsafe-ffi-tests"
+description = "Tests for 14-unsafe-ffi -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m14-unsafe-ffi-tests                   -> tests ../solution
+# cargo test -p m14-unsafe-ffi-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m14-unsafe-ffi = { path = "../exercise" }
+m14-unsafe-ffi-solution = { path = "../solution" }

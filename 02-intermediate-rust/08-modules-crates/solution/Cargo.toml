@@ -1,0 +1,23 @@
+[package]
+name = "m08-modules-crates-solution"
+description = "Reference solution for 08-modules-crates: a bookstore library"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# Exercise 4: features.
+[features]
+default = ["discounts"]
+discounts = []
+# An optional dependency is enabled with "dep:<name>". "m08-money-solution/serde"
+# forwards the feature to the money crate, so Money becomes Serialize too.
+json = ["dep:serde", "dep:serde_json", "m08-money-solution/serde"]
+# Bonus: enabling `report` enables `discounts` as well.
+report = ["discounts"]
+
+[dependencies]
+# Exercise 5: a path dependency on another crate in the same workspace.
+m08-money-solution = { path = "crates/money" }
+serde = { workspace = true, optional = true }
+serde_json = { workspace = true, optional = true }

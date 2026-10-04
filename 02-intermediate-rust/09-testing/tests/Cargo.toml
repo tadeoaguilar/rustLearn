@@ -1,0 +1,19 @@
+[package]
+name = "m09-testing-tests"
+description = "Acceptance tests (the answer key) for 09-testing"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m09-testing-tests                   -> tests ../solution
+# cargo test -p m09-testing-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m09-testing = { path = "../exercise" }
+m09-testing-solution = { path = "../solution" }
+
+[dev-dependencies]
+proptest.workspace = true

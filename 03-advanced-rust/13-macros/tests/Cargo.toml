@@ -1,0 +1,29 @@
+[package]
+name = "m13-macros-tests"
+description = "Tests for 13-macros -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m13-macros-tests                          -> tests ../solution (everything)
+# cargo test -p m13-macros-tests --features mine,ex1      -> your code, Exercise 1 only
+# cargo test -p m13-macros-tests --features mine,all      -> your code, everything
+#
+# Tests use the items your macros *generate*. Until you've written a macro,
+# its tests can't even compile -- so in `mine` mode each exercise is opt-in.
+mine = []
+ex1 = []
+ex2 = []
+ex3 = []
+ex4 = []
+ex5 = []
+ex6 = []
+ex7 = []
+bonus = []
+all = ["ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "bonus"]
+
+[dependencies]
+m13-macros = { path = "../exercise" }
+m13-macros-solution = { path = "../solution" }

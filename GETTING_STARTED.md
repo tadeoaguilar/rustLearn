@@ -7,11 +7,12 @@ Welcome to your comprehensive Rust learning path! This guide will help you navig
 This repository contains:
 
 ✅ **Complete Learning Path Structure** - 40 modules across 8 phases
-✅ **Detailed READMEs** - For each phase with learning objectives
-✅ **Comprehensive Exercises** - For fundamentals and key topics
+✅ **Exercises, solutions and tests for Phases 1–3** - 15 modules, each with a
+   crate to fill in, a reference solution, and tests that check either
+✅ **Detailed READMEs** - For each phase and each Phase 1–3 module
 ✅ **Exercise Templates** - To create more exercises as needed
 ✅ **Progress Tracking** - Template to monitor your journey
-✅ **Project Ideas** - Beginner to expert level
+✅ **Project Ideas** - Beginner to expert level, plus a complete CRUD API project
 
 ## Quick Start
 
@@ -34,54 +35,107 @@ Choose your IDE/Editor:
 - **IntelliJ IDEA** + Rust plugin
 - **Vim/Neovim** + rust.vim
 
-### 3. Start Learning
+### 3. Check Everything Builds
+
+From the repository root (the folder with `Cargo.toml`):
 
 ```bash
-cd 01-rust-fundamentals/01-getting-started
-cat exercises.md  # Read the first exercises
+cargo test            # builds every module and runs 394 tests against the solutions
 ```
 
-### 4. Track Your Progress
+The first build downloads and compiles dependencies (tokio, axum, rayon, …)
+and takes a few minutes. Later builds are incremental. You need a C compiler
+for module 14 (`xcode-select --install` on macOS, `build-essential` on Linux).
+
+### 4. Start Learning
+
+```bash
+cat 01-rust-fundamentals/01-getting-started/exercises.md
+cat 01-rust-fundamentals/01-getting-started/GETTING_STARTED.md
+cargo run -p m01-getting-started-solution -- all
+```
+
+### 5. Track Your Progress
 
 ```bash
 cp PROGRESS.template.md PROGRESS.md
 # Edit PROGRESS.md as you complete modules
 ```
 
-## Available Exercises
+## How Every Module Works
 
-### ✅ Complete Exercise Files
+Each module in Phases 1–3 has the same shape:
 
-**Phase 1: Rust Fundamentals** (All 5 modules)
-- `01-getting-started/exercises.md` - 7 exercises + bonus
-- `02-basic-syntax/exercises.md` - 9 exercises + bonus
-- `03-ownership-borrowing/exercises.md` - 8 exercises + bonus
-- `04-structs-enums/exercises.md` - 9 exercises + bonus
-- `05-error-handling/exercises.md` - 9 exercises + bonus
+```
+<module>/
+├── README.md            # concepts, pitfalls, notes on mistakes in exercises.md
+├── exercises.md         # what to build
+├── GETTING_STARTED.md   # every command for this module
+├── exercise/            # ← YOUR crate     package mNN-<name>
+├── solution/            # ← reference      package mNN-<name>-solution  (+ ANSWERS.md)
+└── tests/               # ← tests          package mNN-<name>-tests
+```
 
-**Phase 2: Intermediate Rust** (2 of 5 modules)
-- `06-traits-generics/exercises.md` - 7 exercises + bonus
-- `07-collections-iterators/exercises.md` - 6 exercises + bonus
+The `exercise/` crate already has every type and function signature the tests
+expect, with `todo!()` bodies (some modules differ slightly; their
+`GETTING_STARTED.md` says how). The workflow:
 
-**Phase 3: Advanced Rust** (1 of 5 modules)
-- `12-async-await/exercises.md` - 8 exercises + bonus
+```bash
+# 1. read the exercise
+cat 02-intermediate-rust/07-collections-iterators/exercises.md
 
-### 📝 To Be Created
+# 2. replace a todo!() in exercise/src/exNN_*.rs, then run it
+cargo run -p m07-collections-iterators -- 5
 
-Use `EXERCISE_TEMPLATE.md` as a guide to create exercises for:
+# 3. test YOUR code (the `mine` feature points the tests at exercise/)
+cargo test -p m07-collections-iterators-tests --features mine ex5_
 
-**Phase 2 Remaining**:
-- 08-modules-crates
-- 09-testing
-- 10-smart-pointers
+# 4. compare with the reference solution
+cargo run -p m07-collections-iterators-solution -- 5
+```
 
-**Phase 3 Remaining**:
-- 11-lifetimes-advanced
-- 13-macros
-- 14-unsafe-ffi
-- 15-concurrency
+The `tests` crate re-exports either crate as `sut` ("system under test"):
 
-**Phases 4-8**: All modules (see EXERCISES_SUMMARY.md for topics)
+```rust
+#[cfg(not(feature = "mine"))] pub use m07_collections_iterators_solution as sut;
+#[cfg(feature = "mine")]      pub use m07_collections_iterators as sut;
+```
+
+so the same tests check both. `cargo test` at the root never enables `mine`,
+so it always runs against the solutions and stays green. (Don't use
+`--all-features` at the root — that switches `mine` on everywhere and tests
+every unfinished exercise crate at once.)
+
+### Module index
+
+| Phase | Module | Package prefix | Exercises |
+|---|---|---|---|
+| 1 | [01 Getting Started](01-rust-fundamentals/01-getting-started/) | `m01-getting-started` | 7 + bonus |
+| 1 | [02 Basic Syntax](01-rust-fundamentals/02-basic-syntax/) | `m02-basic-syntax` | 9 + bonus |
+| 1 | [03 Ownership & Borrowing](01-rust-fundamentals/03-ownership-borrowing/) | `m03-ownership-borrowing` | 8 + bonus |
+| 1 | [04 Structs & Enums](01-rust-fundamentals/04-structs-enums/) | `m04-structs-enums` | 9 + bonus |
+| 1 | [05 Error Handling](01-rust-fundamentals/05-error-handling/) | `m05-error-handling` | 9 + bonus |
+| 2 | [06 Traits & Generics](02-intermediate-rust/06-traits-generics/) | `m06-traits-generics` | 7 + bonus |
+| 2 | [07 Collections & Iterators](02-intermediate-rust/07-collections-iterators/) | `m07-collections-iterators` | 6 + bonus |
+| 2 | [08 Modules & Crates](02-intermediate-rust/08-modules-crates/) | `m08-modules-crates` | 7 + bonus |
+| 2 | [09 Testing](02-intermediate-rust/09-testing/) | `m09-testing` | 7 + bonus |
+| 2 | [10 Smart Pointers](02-intermediate-rust/10-smart-pointers/) | `m10-smart-pointers` | 7 + bonus |
+| 3 | [11 Advanced Lifetimes](03-advanced-rust/11-lifetimes-advanced/) | `m11-lifetimes-advanced` | 7 + bonus |
+| 3 | [12 Async/Await](03-advanced-rust/12-async-await/) | `m12-async-await` | 8 + bonus |
+| 3 | [13 Macros](03-advanced-rust/13-macros/) | `m13-macros` | 7 + bonus |
+| 3 | [14 Unsafe & FFI](03-advanced-rust/14-unsafe-ffi/) | `m14-unsafe-ffi` | 7 + bonus |
+| 3 | [15 Concurrency](03-advanced-rust/15-concurrency/) | `m15-concurrency` | 8 + bonus |
+
+Modules 08–11 and 13–15 had no exercise file originally; theirs were written
+in the same format. Where the original `exercises.md` files contained
+mistakes (wrong expected values, code that doesn't compile, outdated APIs), the
+module's README lists them under "Notes on `exercises.md`" and the solution
+uses the corrected version.
+
+### Still to be created
+
+Phases 4–8 (modules 16–40) have topic outlines in their phase READMEs. Use
+`EXERCISE_TEMPLATE.md` and the structure above to add them.
 
 ## Learning Paths
 
@@ -197,10 +251,11 @@ Complete all 8 phases sequentially
 - Ask for help (it's encouraged!)
 
 ### "Where do I find solutions?"
-- Many exercises have tests (run `cargo test`)
-- Rust Book has examples
-- Search GitHub for similar implementations
-- Ask community for code reviews
+- Every Phase 1–3 module has a `solution/` crate with the same file and
+  function names as your `exercise/` crate, and `solution/ANSWERS.md` for the
+  written questions
+- Run `cargo test -p mNN-<name>-tests --features mine` to see which of yours pass
+- Try for a while before looking: the struggle is where the learning happens
 
 ## Creating Additional Exercises
 
@@ -269,7 +324,7 @@ Want to create more exercises?
 
 ## Next Steps
 
-1. **Right Now**: Start with `01-rust-fundamentals/01-getting-started/exercises.md`
+1. **Right Now**: Run `cargo test` at the root, then open `01-rust-fundamentals/01-getting-started/GETTING_STARTED.md`
 2. **This Week**: Complete all Phase 1 modules
 3. **This Month**: Build first project
 4. **This Quarter**: Choose specialization path
@@ -280,8 +335,8 @@ Want to create more exercises?
 **Ready to start?**
 
 ```bash
-cd 01-rust-fundamentals/01-getting-started
-code exercises.md  # or your preferred editor
+cargo run -p m01-getting-started -- 1     # your first exercise (it will say "not yet implemented")
+code 01-rust-fundamentals/01-getting-started/exercise/src/ex01_hello.rs
 ```
 
 **Happy Learning! 🦀**

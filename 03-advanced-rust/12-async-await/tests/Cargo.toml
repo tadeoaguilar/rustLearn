@@ -1,0 +1,24 @@
+[package]
+name = "m12-async-await-tests"
+description = "Tests for 12-async-await -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m12-async-await-tests                   -> tests ../solution
+# cargo test -p m12-async-await-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m12-async-await = { path = "../exercise" }
+m12-async-await-solution = { path = "../solution" }
+
+[dev-dependencies]
+# test-util: a paused, manually-advanced clock -- timer tests run instantly.
+tokio = { workspace = true, features = ["test-util"] }
+reqwest.workspace = true
+serde_json.workspace = true
+tempfile.workspace = true
+futures.workspace = true

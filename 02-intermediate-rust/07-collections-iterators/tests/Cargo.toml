@@ -1,0 +1,16 @@
+[package]
+name = "m07-collections-iterators-tests"
+description = "Tests for 07-collections-iterators -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m07-collections-iterators-tests                   -> tests ../solution
+# cargo test -p m07-collections-iterators-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m07-collections-iterators = { path = "../exercise" }
+m07-collections-iterators-solution = { path = "../solution" }

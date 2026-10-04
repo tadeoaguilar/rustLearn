@@ -1,0 +1,19 @@
+[package]
+name = "m15-concurrency-tests"
+description = "Tests for 15-concurrency -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m15-concurrency-tests                   -> tests ../solution
+# cargo test -p m15-concurrency-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m15-concurrency = { path = "../exercise" }
+m15-concurrency-solution = { path = "../solution" }
+
+[dev-dependencies]
+tempfile.workspace = true
