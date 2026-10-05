@@ -184,6 +184,31 @@ This phase focuses on building web services, REST APIs, and full-stack applicati
 
 ---
 
+## Running This Phase
+
+Every module has an `exercise/` crate (your code), a `solution/` crate and a
+`tests/` crate. From the repository root:
+
+```bash
+cargo run  -p m17-rest-apis-solution -- demo             # a solution
+cargo run  -p m17-rest-apis -- demo                      # your code
+cargo test -p m17-rest-apis-tests --features mine        # test your code
+```
+
+| Module | Packages | Tests |
+|---|---|---|
+| 16 · Web Frameworks | `m16-web-frameworks[-solution\|-tests]` | 14 |
+| 17 · REST APIs | `m17-rest-apis[-solution\|-tests]` | 18 |
+| 18 · Databases | `m18-databases[-solution\|-tests]` | 16 |
+| 19 · Authentication | `m19-authentication[-solution\|-tests]` | 22 |
+| 20 · WebSockets | `m20-websockets[-solution\|-tests]` | 14 |
+
+None of the modules had an `exercises.md` originally; all five were written in
+the format of Phases 1–3. Everything runs offline: SQLite in memory instead of
+PostgreSQL, an in-process mock OAuth2 provider instead of GitHub, local
+servers on random ports in every test. Rocket is covered in module 16's
+comparison and bonus, not implemented.
+
 ## Phase Completion Checklist
 
 - [ ] Built multiple REST APIs with different frameworks

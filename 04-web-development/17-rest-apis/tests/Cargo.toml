@@ -1,0 +1,22 @@
+[package]
+name = "m17-rest-apis-tests"
+description = "Tests for 17-rest-apis -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m17-rest-apis-tests                   -> tests ../solution
+# cargo test -p m17-rest-apis-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m17-rest-apis = { path = "../exercise" }
+m17-rest-apis-solution = { path = "../solution" }
+
+[dev-dependencies]
+tokio.workspace = true
+reqwest = { workspace = true, features = ["json"] }
+serde_json.workspace = true
+validator.workspace = true

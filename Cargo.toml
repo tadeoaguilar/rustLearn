@@ -22,6 +22,9 @@ members = [
     "03-advanced-rust/*/solution",
     "03-advanced-rust/*/tests",
     "03-advanced-rust/*/*/derive",
+    "04-web-development/*/exercise",
+    "04-web-development/*/solution",
+    "04-web-development/*/tests",
 ]
 # The CRUD project is a standalone application with its own Cargo.lock,
 # build it from inside its own directory.
@@ -44,7 +47,7 @@ tokio-stream = { version = "0.1", features = ["fs"] }
 futures = "0.3"
 async-trait = "0.1"
 reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
-axum = "0.8"
+axum = { version = "0.8", features = ["ws", "macros"] }
 rayon = "1"
 crossbeam = "0.8"
 proptest = "1"
@@ -55,3 +58,30 @@ quote = "1"
 proc-macro2 = "1"
 cc = "1"
 tempfile = "3"
+
+# Phase 4: web development
+actix-web = "4"
+askama = "0.16"
+tower = { version = "0.5", features = ["util"] }
+tower-http = { version = "0.6", features = ["fs", "cors", "trace", "timeout", "set-header"] }
+axum-extra = { version = "0.12", features = ["cookie", "cookie-private", "typed-header"] }
+utoipa = { version = "6", features = ["axum_extras"] }
+validator = { version = "0.21", features = ["derive"] }
+sqlx = { version = "0.9", default-features = false, features = ["runtime-tokio", "sqlite", "migrate", "macros"] }
+jsonwebtoken = { version = "11", features = ["rust_crypto"] }
+argon2 = "0.6"
+tokio-tungstenite = "0.30"
+futures-util = "0.3"
+uuid = { version = "1", features = ["v4", "serde"] }
+hmac = "0.12"
+sha1 = "0.10"
+sha2 = "0.10"
+base64 = "0.22"
+
+# Argon2 is deliberately slow; unoptimised (debug) it's ~10x slower still,
+# which makes module 19's tests crawl. Optimising just these dependencies
+# keeps debug builds of our own code fast to compile.
+[profile.dev.package.argon2]
+opt-level = 3
+[profile.dev.package.blake2]
+opt-level = 3

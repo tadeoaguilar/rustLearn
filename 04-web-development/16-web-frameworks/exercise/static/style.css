@@ -1,0 +1,6 @@
+body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+header { margin-bottom: 2rem; }
+label { display: block; margin: 1rem 0; }
+input, textarea { display: block; width: 100%; }
+.error { color: #b00020; }
+.empty { color: #666; }

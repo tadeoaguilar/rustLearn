@@ -1,0 +1,21 @@
+[package]
+name = "m19-authentication-tests"
+description = "Tests for 19-authentication -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m19-authentication-tests                   -> tests ../solution
+# cargo test -p m19-authentication-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m19-authentication = { path = "../exercise" }
+m19-authentication-solution = { path = "../solution" }
+
+[dev-dependencies]
+tokio.workspace = true
+reqwest = { workspace = true, features = ["json", "cookies"] }
+serde_json.workspace = true

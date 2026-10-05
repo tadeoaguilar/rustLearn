@@ -1,0 +1,22 @@
+[package]
+name = "m20-websockets-tests"
+description = "Tests for 20-websockets -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m20-websockets-tests                   -> tests ../solution
+# cargo test -p m20-websockets-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m20-websockets = { path = "../exercise" }
+m20-websockets-solution = { path = "../solution" }
+
+[dev-dependencies]
+tokio.workspace = true
+tokio-tungstenite.workspace = true
+reqwest = { workspace = true, features = ["json"] }
+serde_json.workspace = true

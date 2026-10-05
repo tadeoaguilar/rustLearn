@@ -1,0 +1,18 @@
+[package]
+name = "m17-rest-apis-solution"
+description = "Reference solution for 17-rest-apis"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+axum.workspace = true
+tokio.workspace = true
+tower-http.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+validator.workspace = true
+utoipa.workspace = true
+reqwest = { workspace = true, features = ["json"] }
+thiserror.workspace = true

@@ -7,9 +7,9 @@ Welcome to your comprehensive Rust learning path! This guide will help you navig
 This repository contains:
 
 ✅ **Complete Learning Path Structure** - 40 modules across 8 phases
-✅ **Exercises, solutions and tests for Phases 1–3** - 15 modules, each with a
+✅ **Exercises, solutions and tests for Phases 1–4** - 20 modules, each with a
    crate to fill in, a reference solution, and tests that check either
-✅ **Detailed READMEs** - For each phase and each Phase 1–3 module
+✅ **Detailed READMEs** - For each phase and each Phase 1–4 module
 ✅ **Exercise Templates** - To create more exercises as needed
 ✅ **Progress Tracking** - Template to monitor your journey
 ✅ **Project Ideas** - Beginner to expert level, plus a complete CRUD API project
@@ -40,7 +40,7 @@ Choose your IDE/Editor:
 From the repository root (the folder with `Cargo.toml`):
 
 ```bash
-cargo test            # builds every module and runs 394 tests against the solutions
+cargo test            # builds every module and runs 478 tests against the solutions
 ```
 
 The first build downloads and compiles dependencies (tokio, axum, rayon, …)
@@ -64,7 +64,7 @@ cp PROGRESS.template.md PROGRESS.md
 
 ## How Every Module Works
 
-Each module in Phases 1–3 has the same shape:
+Each module in Phases 1–4 has the same shape:
 
 ```
 <module>/
@@ -125,8 +125,13 @@ every unfinished exercise crate at once.)
 | 3 | [13 Macros](03-advanced-rust/13-macros/) | `m13-macros` | 7 + bonus |
 | 3 | [14 Unsafe & FFI](03-advanced-rust/14-unsafe-ffi/) | `m14-unsafe-ffi` | 7 + bonus |
 | 3 | [15 Concurrency](03-advanced-rust/15-concurrency/) | `m15-concurrency` | 8 + bonus |
+| 4 | [16 Web Frameworks](04-web-development/16-web-frameworks/) | `m16-web-frameworks` | 7 + bonus |
+| 4 | [17 REST APIs](04-web-development/17-rest-apis/) | `m17-rest-apis` | 8 + bonus |
+| 4 | [18 Databases](04-web-development/18-databases/) | `m18-databases` | 7 + bonus |
+| 4 | [19 Authentication](04-web-development/19-authentication/) | `m19-authentication` | 6 + bonus |
+| 4 | [20 WebSockets](04-web-development/20-websockets/) | `m20-websockets` | 7 + bonus |
 
-Modules 08–11 and 13–15 had no exercise file originally; theirs were written
+Modules 08–11 and 13–20 had no exercise file originally; theirs were written
 in the same format. Where the original `exercises.md` files contained
 mistakes (wrong expected values, code that doesn't compile, outdated APIs), the
 module's README lists them under "Notes on `exercises.md`" and the solution
@@ -134,7 +139,7 @@ uses the corrected version.
 
 ### Still to be created
 
-Phases 4–8 (modules 16–40) have topic outlines in their phase READMEs. Use
+Phases 5–8 (modules 21–40) have topic outlines in their phase READMEs. Use
 `EXERCISE_TEMPLATE.md` and the structure above to add them.
 
 ## Learning Paths
@@ -251,7 +256,7 @@ Complete all 8 phases sequentially
 - Ask for help (it's encouraged!)
 
 ### "Where do I find solutions?"
-- Every Phase 1–3 module has a `solution/` crate with the same file and
+- Every Phase 1–4 module has a `solution/` crate with the same file and
   function names as your `exercise/` crate, and `solution/ANSWERS.md` for the
   written questions
 - Run `cargo test -p mNN-<name>-tests --features mine` to see which of yours pass

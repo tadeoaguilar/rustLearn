@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} · Rust Blog{% endblock %}
+{% block content %}
+<article>
+  <h1>{{ post.title }}</h1>
+  {% for paragraph in post.paragraphs() %}
+    <p>{{ paragraph }}</p>
+  {% endfor %}
+</article>
+{% endblock %}

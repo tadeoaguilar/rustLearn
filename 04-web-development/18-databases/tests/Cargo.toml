@@ -1,0 +1,21 @@
+[package]
+name = "m18-databases-tests"
+description = "Tests for 18-databases -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m18-databases-tests                   -> tests ../solution
+# cargo test -p m18-databases-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m18-databases = { path = "../exercise" }
+m18-databases-solution = { path = "../solution" }
+
+[dev-dependencies]
+tokio.workspace = true
+sqlx.workspace = true
+tempfile.workspace = true

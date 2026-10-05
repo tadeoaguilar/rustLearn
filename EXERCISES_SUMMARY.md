@@ -4,7 +4,7 @@ This document provides an overview of all exercises across the 40 modules in the
 
 ## Status
 
-Phases 1–3 have exercises **and** runnable code: for every module an
+Phases 1–4 have exercises **and** runnable code: for every module an
 `exercise/` crate to fill in, a `solution/` crate, and a `tests/` crate that
 checks either one. See [GETTING_STARTED.md](GETTING_STARTED.md) for the
 commands.
@@ -14,7 +14,8 @@ commands.
 | 1 · Rust Fundamentals (01–05) | ✅ | ✅ 120 tests |
 | 2 · Intermediate Rust (06–10) | ✅ | ✅ 88 tests + 47 in module 09's solution + 8 doc tests in module 08 |
 | 3 · Advanced Rust (11–15) | ✅ | ✅ 116 tests + 12 macro doc tests |
-| 4–8 · Specialisations | topic outlines below | — |
+| 4 · Web Development (16–20) | ✅ | ✅ 84 tests |
+| 5–8 · Specialisations | topic outlines below | — |
 
 ## Phase 1: Rust Fundamentals ✅
 
@@ -180,42 +181,57 @@ commands.
 - ✅ A Lock-Free Stack (90 min)
 - ✅ Bonus: Dining Philosophers (45 min)
 
-## Phase 4: Web Development
+## Phase 4: Web Development ✅ *(all exercises written for this repo)*
 
 ### 16-web-frameworks
-- Axum "Hello World"
-- Routing and handlers
-- Middleware
-- State management
-- Template rendering
+- ✅ A Framework-Agnostic Core (40 min)
+- ✅ The API in Axum (45 min)
+- ✅ The Same API in Actix-web (45 min)
+- ✅ Middleware in Both (40 min)
+- ✅ Templates and Forms: a Blog with askama (60 min)
+- ✅ Static Files (15 min)
+- ✅ Load Testing Both Frameworks (40 min)
+- ✅ Bonus: Port It to Rocket (60 min)
 
 ### 17-rest-apis
-- CRUD endpoints
-- Request validation
-- Error responses
-- OpenAPI docs
-- Versioning
+- ✅ CRUD With the Right Status Codes (45 min)
+- ✅ Validation and Problem Details (50 min)
+- ✅ Pagination, Filtering, Sorting (45 min)
+- ✅ Versioning (30 min)
+- ✅ OpenAPI with utoipa (40 min)
+- ✅ Rate Limiting (50 min)
+- ✅ CORS and Content Negotiation (40 min)
+- ✅ A Client SDK (45 min)
+- ✅ Bonus: ETags and Conditional Requests (45 min)
 
 ### 18-databases
-- SQLx setup
-- CRUD operations
-- Migrations
-- Connection pooling
-- Transactions
+- ✅ Connecting and Pooling (30 min)
+- ✅ Migrations (25 min)
+- ✅ Typed Queries and SQL Injection (40 min)
+- ✅ The Repository Pattern (60 min)
+- ✅ Transactions (45 min)
+- ✅ The N+1 Query Problem (40 min)
+- ✅ Indexes and Query Plans (30 min)
+- ✅ Bonus: Keyset Pagination (45 min)
 
 ### 19-authentication
-- Password hashing
-- JWT tokens
-- OAuth2 integration
-- Session management
-- RBAC
+- ✅ Passwords, Registration, Login (60 min)
+- ✅ JWT Access and Refresh Tokens (60 min)
+- ✅ Role-Based Access Control (45 min)
+- ✅ Cookie Sessions and CSRF (60 min)
+- ✅ API Keys (30 min)
+- ✅ OAuth2 Login with PKCE (90 min)
+- ✅ Bonus: TOTP Two-Factor Authentication (60 min)
 
 ### 20-websockets
-- WebSocket server
-- Broadcasting
-- Rooms/channels
-- Reconnection
-- Real-time chat
+- ✅ Echo (20 min)
+- ✅ A Typed Protocol (30 min)
+- ✅ Chat Rooms (75 min)
+- ✅ Push Notifications From HTTP (40 min)
+- ✅ Heartbeats (40 min)
+- ✅ A Collaborative Document (60 min)
+- ✅ A Live Dashboard (25 min)
+- ✅ Bonus: Reconnecting With Backoff (40 min)
 
 ## Phase 5: Cloud Native
 

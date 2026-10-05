@@ -4,8 +4,8 @@ A comprehensive, structured learning path to master Rust programming, from funda
 
 ## Current Status
 
-Phases 1–3 have exercises, a reference solution and tests for every module.
-Phases 4–8 are topic outlines (each phase README lists its modules).
+Phases 1–4 have exercises, a reference solution and tests for every module.
+Phases 5–8 are topic outlines (each phase README lists its modules).
 
 | Module | Exercises | Runnable code | Status |
 |---|---|---|---|
@@ -24,17 +24,23 @@ Phases 4–8 are topic outlines (each phase README lists its modules).
 | 13 · Macros | ✅ | ✅ | **Ready** — 30 tests + 12 doc tests |
 | 14 · Unsafe & FFI | ✅ | ✅ | **Ready** — 17 tests (needs a C compiler) |
 | 15 · Concurrency | ✅ | ✅ | **Ready** — 25 tests |
-| 16–40 · Phases 4–8 | outlines | — | Planned |
+| 16 · Web Frameworks | ✅ | ✅ | **Ready** — 14 tests |
+| 17 · REST APIs | ✅ | ✅ | **Ready** — 18 tests |
+| 18 · Databases | ✅ | ✅ | **Ready** — 16 tests |
+| 19 · Authentication | ✅ | ✅ | **Ready** — 22 tests |
+| 20 · WebSockets | ✅ | ✅ | **Ready** — 14 tests |
+| 21–40 · Phases 5–8 | outlines | — | Planned |
 | CRUD API project | ✅ | ✅ | Standalone app in `10-crud-api-project/` |
 
-`cargo test` at the repository root runs **394 tests** (unit, integration and
-doc tests across all three phases) against the reference solutions. Nothing
-needs Docker or a network connection; module 14 needs a C compiler, which
+`cargo test` at the repository root runs **478 tests** (unit, integration and
+doc tests across all four phases) against the reference solutions. Nothing
+needs Docker or a network connection — Phase 4's web services run on local
+ports, with SQLite and a mock OAuth2 provider; module 14 needs a C compiler, which
 every Rust install on macOS/Linux already has or can get with one command.
 
 ## How the Code Is Organised
 
-The repository root is a single Cargo workspace. Each module in Phases 1–3
+The repository root is a single Cargo workspace. Each module in Phases 1–4
 looks like this:
 
 ```
