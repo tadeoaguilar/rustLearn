@@ -1,0 +1,22 @@
+[package]
+name = "m25-service-mesh-tests"
+description = "Tests for 25-service-mesh -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m25-service-mesh-tests                   -> tests ../solution
+# cargo test -p m25-service-mesh-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m25-service-mesh = { path = "../exercise" }
+m25-service-mesh-solution = { path = "../solution" }
+
+[dev-dependencies]
+tokio.workspace = true
+reqwest = { workspace = true, features = ["json"] }
+axum.workspace = true
+serde_json.workspace = true

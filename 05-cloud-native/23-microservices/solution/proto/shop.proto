@@ -1,0 +1,90 @@
+// The contract between the services. Both sides are generated from this
+// file (build.rs), so client and server can't disagree about the wire format.
+//
+// Evolving it safely: add fields with NEW numbers; never reuse or renumber a
+// field; to remove one, `reserved` its number and name.
+syntax = "proto3";
+
+package shop.v1;
+
+// ---- Inventory: owns stock levels -------------------------------------------------
+
+service Inventory {
+  // NOT_FOUND for unknown SKUs.
+  rpc GetItem(GetItemRequest) returns (Item);
+  // Holds stock for an order. Idempotent per reservation_id: retrying a
+  // request that already succeeded returns the same reservation.
+  rpc Reserve(ReserveRequest) returns (Reservation);
+  // Gives held stock back. Idempotent: releasing twice is fine.
+  rpc Release(ReleaseRequest) returns (ReleaseResponse);
+  // Server streaming: the current level of a SKU, then every change.
+  rpc WatchStock(WatchStockRequest) returns (stream StockEvent);
+}
+
+message GetItemRequest {
+  string sku = 1;
+}
+
+message Item {
+  string sku = 1;
+  string name = 2;
+  uint32 available = 3;
+  uint64 price_cents = 4;
+}
+
+message ReserveRequest {
+  string reservation_id = 1;
+  string sku = 2;
+  uint32 quantity = 3;
+}
+
+message Reservation {
+  string reservation_id = 1;
+  string sku = 2;
+  uint32 quantity = 3;
+  uint32 remaining = 4;
+}
+
+message ReleaseRequest {
+  string reservation_id = 1;
+}
+
+message ReleaseResponse {
+  bool released = 1;
+}
+
+message WatchStockRequest {
+  string sku = 1;
+}
+
+message StockEvent {
+  string sku = 1;
+  uint32 available = 2;
+}
+
+// ---- Orders: the entry point; calls Inventory and Payments --------------------------
+
+service Orders {
+  rpc PlaceOrder(PlaceOrderRequest) returns (Order);
+}
+
+message PlaceOrderRequest {
+  // The client's idempotency key: retrying the same order_id never orders twice.
+  string order_id = 1;
+  string customer = 2;
+  string sku = 3;
+  uint32 quantity = 4;
+}
+
+enum OrderState {
+  ORDER_STATE_UNSPECIFIED = 0;
+  ORDER_STATE_CONFIRMED = 1;
+  ORDER_STATE_REJECTED = 2;
+}
+
+message Order {
+  string order_id = 1;
+  OrderState state = 2;
+  uint64 total_cents = 3;
+  string reason = 4;
+}

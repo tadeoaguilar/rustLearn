@@ -1,0 +1,201 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: apps.rustlearn.dev
+spec:
+  group: rustlearn.dev
+  names:
+    kind: App
+    plural: apps
+    shortNames:
+    - rapp
+    singular: app
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .spec.image
+      name: Image
+      type: string
+    - jsonPath: .spec.replicas
+      name: Desired
+      type: integer
+    - jsonPath: .status.readyReplicas
+      name: Ready
+      type: integer
+    - jsonPath: .status.phase
+      name: Phase
+      type: string
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for AppSpec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              config:
+                additionalProperties:
+                  type: string
+                default: {}
+                description: Files for the app, mounted at /etc/app from a ConfigMap.
+                type: object
+              env:
+                additionalProperties:
+                  type: string
+                default: {}
+                description: Environment variables for the container.
+                type: object
+              image:
+                description: Container image, with a tag or digest.
+                minLength: 1
+                type: string
+              port:
+                default: 8080
+                format: int32
+                maximum: 65535.0
+                minimum: 1.0
+                type: integer
+              replicas:
+                format: int32
+                maximum: 50.0
+                minimum: 0.0
+                type: integer
+            required:
+            - image
+            - replicas
+            type: object
+          status:
+            nullable: true
+            properties:
+              conditions:
+                items:
+                  description: The standard shape of a status condition (`kubectl wait --for=condition=Ready`).
+                  properties:
+                    message:
+                      type: string
+                    reason:
+                      type: string
+                    status:
+                      description: '"True", "False" or "Unknown" -- strings, by Kubernetes convention.'
+                      type: string
+                    type:
+                      type: string
+                  required:
+                  - message
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+              observedGeneration:
+                description: |-
+                  The `metadata.generation` this status describes. Clients compare it
+                  with the current generation to know whether the status is stale.
+                format: int64
+                nullable: true
+                type: integer
+              phase:
+                enum:
+                - Pending
+                - Progressing
+                - Ready
+                - Degraded
+                - Deleting
+                type: string
+              readyReplicas:
+                format: int32
+                type: integer
+            required:
+            - conditions
+            - phase
+            - readyReplicas
+            type: object
+        required:
+        - spec
+        title: App
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: databases.rustlearn.dev
+spec:
+  group: rustlearn.dev
+  names:
+    kind: Database
+    plural: databases
+    shortNames:
+    - rdb
+    singular: database
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .spec.engine
+      name: Engine
+      type: string
+    - jsonPath: .status.phase
+      name: Phase
+      type: string
+    - jsonPath: .status.endpoint
+      name: Endpoint
+      type: string
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for DatabaseSpec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              engine:
+                enum:
+                - postgres
+                - mysql
+                type: string
+              storageGb:
+                format: int32
+                maximum: 1000.0
+                minimum: 1.0
+                type: integer
+              version:
+                minLength: 1
+                type: string
+            required:
+            - engine
+            - storageGb
+            - version
+            type: object
+          status:
+            nullable: true
+            properties:
+              endpoint:
+                nullable: true
+                type: string
+              message:
+                nullable: true
+                type: string
+              phase:
+                enum:
+                - Pending
+                - Progressing
+                - Ready
+                - Degraded
+                - Deleting
+                type: string
+              secretName:
+                description: The Secret holding username, password, host, port and url.
+                nullable: true
+                type: string
+            required:
+            - phase
+            type: object
+        required:
+        - spec
+        title: Database
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

@@ -1,0 +1,44 @@
+# What the operator may do -- only what it needs. For running the operator
+# *inside* the cluster (as a Deployment using this ServiceAccount). Running
+# it locally with `cargo run -- run` uses your own kubeconfig credentials.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rustlearn-system
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: rustlearn-operator
+  namespace: rustlearn-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: rustlearn-operator
+rules:
+  - apiGroups: ["rustlearn.dev"]
+    resources: ["apps", "databases"]
+    verbs: ["get", "list", "watch", "patch"]
+  - apiGroups: ["rustlearn.dev"]
+    resources: ["apps/status", "databases/status"]
+    verbs: ["get", "patch"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch", "create", "patch"]
+  - apiGroups: [""]
+    resources: ["services", "configmaps", "secrets"]
+    verbs: ["get", "list", "watch", "create", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: rustlearn-operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: rustlearn-operator
+subjects:
+  - kind: ServiceAccount
+    name: rustlearn-operator
+    namespace: rustlearn-system

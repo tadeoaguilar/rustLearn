@@ -1,0 +1,12 @@
+# kubectl apply -f deploy/examples/database.yaml
+# kubectl get rdb; kubectl get secret orders-db-credentials -o yaml
+# kubectl delete rdb orders-db     # watch the finalizer hold it until cleanup
+apiVersion: rustlearn.dev/v1
+kind: Database
+metadata:
+  name: orders-db
+  namespace: default
+spec:
+  engine: postgres
+  version: "17"
+  storageGb: 20

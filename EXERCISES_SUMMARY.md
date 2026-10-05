@@ -4,7 +4,7 @@ This document provides an overview of all exercises across the 40 modules in the
 
 ## Status
 
-Phases 1–4 have exercises **and** runnable code: for every module an
+Phases 1–5 have exercises **and** runnable code: for every module an
 `exercise/` crate to fill in, a `solution/` crate, and a `tests/` crate that
 checks either one. See [GETTING_STARTED.md](GETTING_STARTED.md) for the
 commands.
@@ -15,7 +15,8 @@ commands.
 | 2 · Intermediate Rust (06–10) | ✅ | ✅ 88 tests + 47 in module 09's solution + 8 doc tests in module 08 |
 | 3 · Advanced Rust (11–15) | ✅ | ✅ 116 tests + 12 macro doc tests |
 | 4 · Web Development (16–20) | ✅ | ✅ 84 tests |
-| 5–8 · Specialisations | topic outlines below | — |
+| 5 · Cloud Native (21–25) | ✅ | ✅ 89 tests |
+| 6–8 · Specialisations | topic outlines below | — |
 
 ## Phase 1: Rust Fundamentals ✅
 
@@ -233,42 +234,58 @@ commands.
 - ✅ A Live Dashboard (25 min)
 - ✅ Bonus: Reconnecting With Backoff (40 min)
 
-## Phase 5: Cloud Native
+## Phase 5: Cloud Native ✅ *(all exercises written for this repo)*
 
 ### 21-containerization
-- Dockerfile for Rust
-- Multi-stage builds
-- Alpine images
-- Docker Compose
-- Health checks
+- ✅ Configuration From the Environment (40 min)
+- ✅ Liveness, Readiness, Startup (30 min)
+- ✅ Graceful Shutdown (60 min)
+- ✅ A Health Check Without curl (40 min)
+- ✅ Build Metadata (25 min)
+- ✅ A Dockerfile Linter (60 min)
+- ✅ Compose Start Order (45 min)
+- ✅ The Images and the Stack (60 min)
+- ✅ Bonus: Readiness That Follows a Dependency (40 min)
 
 ### 22-kubernetes-operators
-- CRD definition
-- Controller pattern
-- kube-rs basics
-- Reconciliation loop
-- Testing operators
+- ✅ Custom Resource Definitions (40 min)
+- ✅ The Desired State (50 min)
+- ✅ Planning Without Hot Loops (50 min)
+- ✅ Status and Conditions (30 min)
+- ✅ A Database Operator With a Finalizer (60 min)
+- ✅ Reconciling Apps (45 min)
+- ✅ Retries and Metrics (35 min)
+- ✅ Bonus: A Real Cluster (60 min)
 
 ### 23-microservices
-- gRPC with Tonic
-- Service discovery
-- Circuit breakers
-- Message queues
-- Event-driven arch
+- ✅ A gRPC Service (50 min)
+- ✅ Server Streaming (30 min)
+- ✅ Request IDs and Deadlines (40 min)
+- ✅ Retries With Backoff and Jitter (40 min)
+- ✅ A Circuit Breaker (50 min)
+- ✅ Events, At Least Once (50 min)
+- ✅ The Orders Saga (90 min)
+- ✅ Bonus: Client-Side Load Balancing (40 min)
 
 ### 24-observability
-- Structured logging
-- Prometheus metrics
-- Distributed tracing
-- Dashboards
-- Alerting
+- ✅ Structured Logs (40 min)
+- ✅ Filtering and Redaction (25 min)
+- ✅ Prometheus Metrics (50 min)
+- ✅ W3C Trace Context (30 min)
+- ✅ Distributed Tracing (90 min)
+- ✅ SLOs and Burn-Rate Alerts (40 min)
+- ✅ Dashboards and Alerts as Code (40 min)
+- ✅ Bonus: Sampling (20 min)
 
 ### 25-service-mesh
-- Linkerd setup
-- mTLS configuration
-- Traffic management
-- Canary deployments
-- Policy enforcement
+- ✅ An L4 Proxy (25 min)
+- ✅ L7 Routing and Headers (45 min)
+- ✅ Retries With a Budget (40 min)
+- ✅ Traffic Splits and Canaries (45 min)
+- ✅ Mutual TLS (75 min)
+- ✅ Authorization by Identity (25 min)
+- ✅ Load Balancing and Outlier Detection, and the sidecar (50 min)
+- ✅ Bonus: Mesh Manifests (25 min)
 
 ## Phase 6: Blockchain & Solana
 

@@ -4,8 +4,8 @@ A comprehensive, structured learning path to master Rust programming, from funda
 
 ## Current Status
 
-Phases 1–4 have exercises, a reference solution and tests for every module.
-Phases 5–8 are topic outlines (each phase README lists its modules).
+Phases 1–5 have exercises, a reference solution and tests for every module.
+Phases 6–8 are topic outlines (each phase README lists its modules).
 
 | Module | Exercises | Runnable code | Status |
 |---|---|---|---|
@@ -29,18 +29,25 @@ Phases 5–8 are topic outlines (each phase README lists its modules).
 | 18 · Databases | ✅ | ✅ | **Ready** — 16 tests |
 | 19 · Authentication | ✅ | ✅ | **Ready** — 22 tests |
 | 20 · WebSockets | ✅ | ✅ | **Ready** — 14 tests |
-| 21–40 · Phases 5–8 | outlines | — | Planned |
+| 21 · Containerization | ✅ | ✅ | **Ready** — 20 tests |
+| 22 · Kubernetes Operators | ✅ | ✅ | **Ready** — 19 tests |
+| 23 · Microservices | ✅ | ✅ | **Ready** — 17 tests |
+| 24 · Observability | ✅ | ✅ | **Ready** — 16 tests |
+| 25 · Service Mesh | ✅ | ✅ | **Ready** — 17 tests |
+| 26–40 · Phases 6–8 | outlines | — | Planned |
 | CRUD API project | ✅ | ✅ | Standalone app in `10-crud-api-project/` |
 
-`cargo test` at the repository root runs **478 tests** (unit, integration and
-doc tests across all four phases) against the reference solutions. Nothing
+`cargo test` at the repository root runs **567 tests** (unit, integration and
+doc tests across all five phases) against the reference solutions. Nothing
 needs Docker or a network connection — Phase 4's web services run on local
-ports, with SQLite and a mock OAuth2 provider; module 14 needs a C compiler, which
+ports, with SQLite and a mock OAuth2 provider; Phase 5 tests its operator
+against an in-memory API server and its gRPC, tracing and mTLS code on local
+ports; module 14 needs a C compiler, which
 every Rust install on macOS/Linux already has or can get with one command.
 
 ## How the Code Is Organised
 
-The repository root is a single Cargo workspace. Each module in Phases 1–4
+The repository root is a single Cargo workspace. Each module in Phases 1–5
 looks like this:
 
 ```

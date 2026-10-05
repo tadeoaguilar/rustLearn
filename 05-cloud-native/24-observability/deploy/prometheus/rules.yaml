@@ -1,0 +1,15 @@
+groups:
+- name: frontend-slo
+  rules:
+  - alert: ErrorBudgetBurnFast
+    annotations:
+      summary: frontend is burning its error budget 14.4x too fast (1h/5m windows)
+    expr: (sum(rate(http_requests_total{job="frontend",status=~"5.."}[1h])) / sum(rate(http_requests_total{job="frontend"}[1h]))) > (14.4 * 0.001000) and (sum(rate(http_requests_total{job="frontend",status=~"5.."}[5m])) / sum(rate(http_requests_total{job="frontend"}[5m]))) > (14.4 * 0.001000)
+    labels:
+      severity: page
+  - alert: ErrorBudgetBurnSlow
+    annotations:
+      summary: frontend is burning its error budget 6x too fast (6h/30m windows)
+    expr: (sum(rate(http_requests_total{job="frontend",status=~"5.."}[6h])) / sum(rate(http_requests_total{job="frontend"}[6h]))) > (6 * 0.001000) and (sum(rate(http_requests_total{job="frontend",status=~"5.."}[30m])) / sum(rate(http_requests_total{job="frontend"}[30m]))) > (6 * 0.001000)
+    labels:
+      severity: ticket

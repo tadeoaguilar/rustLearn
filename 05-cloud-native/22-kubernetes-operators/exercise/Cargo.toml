@@ -1,0 +1,25 @@
+[package]
+name = "m22-kubernetes-operators"
+description = "YOUR WORKSPACE for 22-kubernetes-operators"
+version.workspace = true
+edition.workspace = true
+# kube 4 needs Rust 1.89.
+rust-version = "1.89"
+publish.workspace = true
+
+# Doc examples would run against todo!() bodies, so they are off here.
+[lib]
+doctest = false
+
+[dependencies]
+kube.workspace = true
+k8s-openapi.workspace = true
+schemars.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_yaml_ng.workspace = true
+tokio.workspace = true
+futures.workspace = true
+rand.workspace = true
+sha2.workspace = true
+thiserror.workspace = true

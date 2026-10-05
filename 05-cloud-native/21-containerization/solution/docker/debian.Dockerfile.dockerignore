@@ -1,0 +1,6 @@
+# BuildKit reads <Dockerfile>.dockerignore next to the Dockerfile, so these
+# apply only to this build -- the context is the whole repository.
+**/target
+.git
+**/*.md
+!**/README.md

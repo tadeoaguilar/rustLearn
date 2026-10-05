@@ -1,0 +1,25 @@
+# Optional: Prometheus + Grafana for the module's services.
+#
+#   cargo run -p m24-observability-solution -- serve          # terminal 1
+#   docker compose -f 05-cloud-native/24-observability/deploy/compose.yaml up   # terminal 2
+#   open http://localhost:3002  (Grafana, admin/admin)   http://localhost:9090  (Prometheus)
+name: rustlearn-m24
+
+services:
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/rules.yaml:/etc/prometheus/rules.yaml:ro
+    ports: ["9090:9090"]
+    extra_hosts: ["host.docker.internal:host-gateway"]   # for Linux; built in on Docker Desktop
+
+  grafana:
+    image: grafana/grafana:12.1.0
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports: ["3002:3000"]
+    depends_on: [prometheus]

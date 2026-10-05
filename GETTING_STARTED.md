@@ -7,9 +7,9 @@ Welcome to your comprehensive Rust learning path! This guide will help you navig
 This repository contains:
 
 ✅ **Complete Learning Path Structure** - 40 modules across 8 phases
-✅ **Exercises, solutions and tests for Phases 1–4** - 20 modules, each with a
+✅ **Exercises, solutions and tests for Phases 1–5** - 25 modules, each with a
    crate to fill in, a reference solution, and tests that check either
-✅ **Detailed READMEs** - For each phase and each Phase 1–4 module
+✅ **Detailed READMEs** - For each phase and each Phase 1–5 module
 ✅ **Exercise Templates** - To create more exercises as needed
 ✅ **Progress Tracking** - Template to monitor your journey
 ✅ **Project Ideas** - Beginner to expert level, plus a complete CRUD API project
@@ -40,7 +40,7 @@ Choose your IDE/Editor:
 From the repository root (the folder with `Cargo.toml`):
 
 ```bash
-cargo test            # builds every module and runs 478 tests against the solutions
+cargo test            # builds every module and runs 567 tests against the solutions
 ```
 
 The first build downloads and compiles dependencies (tokio, axum, rayon, …)
@@ -64,7 +64,7 @@ cp PROGRESS.template.md PROGRESS.md
 
 ## How Every Module Works
 
-Each module in Phases 1–4 has the same shape:
+Each module in Phases 1–5 has the same shape:
 
 ```
 <module>/
@@ -130,8 +130,13 @@ every unfinished exercise crate at once.)
 | 4 | [18 Databases](04-web-development/18-databases/) | `m18-databases` | 7 + bonus |
 | 4 | [19 Authentication](04-web-development/19-authentication/) | `m19-authentication` | 6 + bonus |
 | 4 | [20 WebSockets](04-web-development/20-websockets/) | `m20-websockets` | 7 + bonus |
+| 5 | [21 Containerization](05-cloud-native/21-containerization/) | `m21-containerization` | 8 + bonus |
+| 5 | [22 Kubernetes Operators](05-cloud-native/22-kubernetes-operators/) | `m22-kubernetes-operators` | 7 + bonus |
+| 5 | [23 Microservices](05-cloud-native/23-microservices/) | `m23-microservices` | 7 + bonus |
+| 5 | [24 Observability](05-cloud-native/24-observability/) | `m24-observability` | 7 + bonus |
+| 5 | [25 Service Mesh](05-cloud-native/25-service-mesh/) | `m25-service-mesh` | 7 + bonus |
 
-Modules 08–11 and 13–20 had no exercise file originally; theirs were written
+Modules 08–11 and 13–25 had no exercise file originally; theirs were written
 in the same format. Where the original `exercises.md` files contained
 mistakes (wrong expected values, code that doesn't compile, outdated APIs), the
 module's README lists them under "Notes on `exercises.md`" and the solution
@@ -139,7 +144,7 @@ uses the corrected version.
 
 ### Still to be created
 
-Phases 5–8 (modules 21–40) have topic outlines in their phase READMEs. Use
+Phases 6–8 (modules 26–40) have topic outlines in their phase READMEs. Use
 `EXERCISE_TEMPLATE.md` and the structure above to add them.
 
 ## Learning Paths
@@ -256,7 +261,7 @@ Complete all 8 phases sequentially
 - Ask for help (it's encouraged!)
 
 ### "Where do I find solutions?"
-- Every Phase 1–4 module has a `solution/` crate with the same file and
+- Every Phase 1–5 module has a `solution/` crate with the same file and
   function names as your `exercise/` crate, and `solution/ANSWERS.md` for the
   written questions
 - Run `cargo test -p mNN-<name>-tests --features mine` to see which of yours pass

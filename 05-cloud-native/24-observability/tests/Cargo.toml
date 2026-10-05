@@ -1,0 +1,24 @@
+[package]
+name = "m24-observability-tests"
+description = "Tests for 24-observability -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m24-observability-tests                   -> tests ../solution
+# cargo test -p m24-observability-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m24-observability = { path = "../exercise" }
+m24-observability-solution = { path = "../solution" }
+
+[dev-dependencies]
+tokio.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+reqwest.workspace = true
+serde_json.workspace = true
+serde_yaml_ng.workspace = true

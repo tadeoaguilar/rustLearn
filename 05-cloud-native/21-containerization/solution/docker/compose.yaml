@@ -1,0 +1,64 @@
+# Local development stack: Postgres, the API, and a second instance of the
+# same image with different configuration.
+#
+#   docker compose -f 05-cloud-native/21-containerization/solution/docker/compose.yaml up --build
+#   curl localhost:8080/readyz      # the API, once the database is healthy
+#   docker compose -f ... down
+name: rustlearn-m21
+
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets: [db_password]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d app"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build:
+      context: ../../../..          # the repository root: the build needs the workspace
+      dockerfile: 05-cloud-native/21-containerization/solution/docker/scratch.Dockerfile
+      args:
+        GIT_SHA: dev
+    image: rustlearn/m21:scratch
+    environment:
+      PORT: "8080"
+      LOG_LEVEL: info
+      DATABASE_URL: postgres://postgres@db:5432/app
+      API_TOKEN_FILE: /run/secrets/api_token
+      DRAIN_DELAY_MS: "2000"
+    secrets: [api_token]
+    ports: ["8080:8080"]
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "/app", "healthcheck"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    stop_grace_period: 30s
+
+  admin:
+    build:
+      context: ../../../..
+      dockerfile: 05-cloud-native/21-containerization/solution/docker/scratch.Dockerfile
+    image: rustlearn/m21:scratch
+    environment:
+      PORT: "8081"
+      LOG_LEVEL: debug
+    ports: ["8081:8081"]
+    depends_on:
+      api:
+        condition: service_healthy
+
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt
+  api_token:
+    file: ./secrets/api_token.txt

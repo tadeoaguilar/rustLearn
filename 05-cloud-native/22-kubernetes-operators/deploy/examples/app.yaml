@@ -1,0 +1,18 @@
+# kubectl apply -f deploy/examples/app.yaml && kubectl get rapp -w
+apiVersion: rustlearn.dev/v1
+kind: App
+metadata:
+  name: web
+  namespace: default
+spec:
+  # Any image that serves /healthz and /readyz on the port -- for example the
+  # one from module 21, loaded into the cluster (kind load docker-image ...).
+  image: rustlearn/m21:scratch
+  replicas: 2
+  port: 8080
+  env:
+    LOG_LEVEL: info
+    PORT: "8080"
+  config:
+    app.toml: |
+      greeting = "hello from an operator"

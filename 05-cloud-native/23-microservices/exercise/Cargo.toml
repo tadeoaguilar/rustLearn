@@ -1,0 +1,23 @@
+[package]
+name = "m23-microservices"
+description = "YOUR WORKSPACE for 23-microservices"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# Doc examples would run against todo!() bodies, so they are off here.
+[lib]
+doctest = false
+
+[dependencies]
+tonic.workspace = true
+tonic-prost.workspace = true
+prost.workspace = true
+tokio.workspace = true
+tokio-stream = { workspace = true, features = ["net", "sync"] }
+rand.workspace = true
+
+[build-dependencies]
+tonic-prost-build.workspace = true
+protox.workspace = true

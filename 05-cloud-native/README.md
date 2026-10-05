@@ -194,6 +194,32 @@ CMD ["app"]
 
 ---
 
+## Running This Phase
+
+Every module has an `exercise/` crate (your code), a `solution/` crate and a
+`tests/` crate. From the repository root:
+
+```bash
+cargo run  -p m23-microservices-solution -- demo           # a solution
+cargo run  -p m23-microservices -- demo                    # your code
+cargo test -p m23-microservices-tests --features mine      # test your code
+```
+
+| Module | Packages | Tests | Optional tools |
+|---|---|---|---|
+| 21 · Containerization | `m21-containerization[-solution\|-tests]` | 20 | Docker |
+| 22 · Kubernetes Operators | `m22-kubernetes-operators[-solution\|-tests]` | 19 | a cluster (kind, Docker Desktop) |
+| 23 · Microservices | `m23-microservices[-solution\|-tests]` | 17 | grpcurl |
+| 24 · Observability | `m24-observability[-solution\|-tests]` | 16 | Docker (Prometheus, Grafana) |
+| 25 · Service Mesh | `m25-service-mesh[-solution\|-tests]` | 17 | a cluster + Linkerd or Istio |
+
+None of the modules had an `exercises.md` originally; all five were written in
+the format of the earlier phases. **No test needs Docker, a cluster or a
+network**: the operator runs against an in-memory API server, gRPC services,
+tracing and mTLS run on local ports, and the Docker, Kubernetes and mesh
+steps are documented as optional. Module 22 needs Rust 1.89+ (kube-rs); the
+Phase 5 crates add a few minutes to the first build.
+
 ## Phase Completion Checklist
 
 - [ ] Built optimized Docker images
