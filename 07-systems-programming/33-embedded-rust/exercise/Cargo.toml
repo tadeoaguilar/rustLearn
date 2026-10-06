@@ -1,0 +1,18 @@
+[package]
+name = "m33-embedded-rust"
+description = "YOUR WORKSPACE for 33-embedded-rust"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# Doc examples would run against todo!() bodies, so they are off here.
+[lib]
+doctest = false
+
+# The library is `#![no_std]`: it would build for a microcontroller
+# (thumbv7em-none-eabihf, ...). The demo binary runs it on the host with
+# simulated hardware.
+[dependencies]
+embedded-hal.workspace = true
+heapless.workspace = true

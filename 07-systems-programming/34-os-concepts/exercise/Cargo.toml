@@ -1,0 +1,18 @@
+[package]
+name = "m34-os-concepts"
+description = "YOUR WORKSPACE for 34-os-concepts"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# Doc examples would run against todo!() bodies, so they are off here.
+[lib]
+doctest = false
+
+[dependencies]
+nix.workspace = true
+signal-hook.workspace = true
+memmap2.workspace = true
+thiserror.workspace = true
+tempfile.workspace = true

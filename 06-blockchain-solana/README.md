@@ -195,6 +195,35 @@ This phase focuses on blockchain development, specifically on the Solana blockch
 
 ---
 
+## Running This Phase
+
+Phase 6 is its own Cargo workspace (Rust 1.89+). From this directory:
+
+```bash
+cargo run  -p m26-solana-basics-solution -- all          # a solution
+cargo run  -p m26-solana-basics -- 1                     # your code
+cargo test -p m26-solana-basics-tests --features mine    # test your code
+cargo test                                               # everything, against the solutions
+```
+
+| Module | Packages | Tests | On the VM (optional) |
+|---|---|---|---|
+| 26 · Solana Basics | `m26-solana-basics[-solution\|-tests]` | 34 | 3 |
+| 27 · Anchor Framework | `m27-anchor-framework[-solution\|-tests]` | 23 | 3 |
+| 28 · Smart Contracts | `m28-smart-contracts[-solution\|-tests]` | 28 | 4 |
+| 29 · NFTs and Tokens | `m29-nfts-tokens[-solution\|-tests]` | 23 | 3 |
+| 30 · DeFi Protocols | `m30-defi-protocols[-solution\|-tests]` | 28 | 2 |
+
+None of the modules had an `exercises.md` originally; all five were written in
+the format of the earlier phases. **No test needs the Solana toolchain, a
+validator or a network**: programs run natively in `solsim`
+([sim/](sim/README.md)), an in-process runtime that enforces Solana's
+account rules and provides the System, SPL Token and ATA programs. With the
+toolchain installed, `./build-sbf.sh` compiles every program to SBF and the
+`sbf` test feature runs them in LiteSVM -- see
+[GETTING_STARTED.md](GETTING_STARTED.md). Deploying to devnet/mainnet and the
+web3.js frontend parts of this README are not covered by exercises.
+
 ## Phase Completion Checklist
 
 - [ ] Deployed multiple programs to devnet/mainnet

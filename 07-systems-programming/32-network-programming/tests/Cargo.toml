@@ -1,0 +1,21 @@
+[package]
+name = "m32-network-programming-tests"
+description = "Tests for 32-network-programming -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m32-network-programming-tests                   -> tests ../solution
+# cargo test -p m32-network-programming-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m32-network-programming = { path = "../exercise" }
+m32-network-programming-solution = { path = "../solution" }
+
+[dev-dependencies]
+tokio.workspace = true
+reqwest.workspace = true
+tempfile.workspace = true

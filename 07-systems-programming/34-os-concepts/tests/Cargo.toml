@@ -1,0 +1,20 @@
+[package]
+name = "m34-os-concepts-tests"
+description = "Tests for 34-os-concepts -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m34-os-concepts-tests                   -> tests ../solution
+# cargo test -p m34-os-concepts-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m34-os-concepts = { path = "../exercise" }
+m34-os-concepts-solution = { path = "../solution" }
+
+[dev-dependencies]
+signal-hook.workspace = true
+tempfile.workspace = true

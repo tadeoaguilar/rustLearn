@@ -135,17 +135,41 @@ every unfinished exercise crate at once.)
 | 5 | [23 Microservices](05-cloud-native/23-microservices/) | `m23-microservices` | 7 + bonus |
 | 5 | [24 Observability](05-cloud-native/24-observability/) | `m24-observability` | 7 + bonus |
 | 5 | [25 Service Mesh](05-cloud-native/25-service-mesh/) | `m25-service-mesh` | 7 + bonus |
+| 6 | [26 Solana Basics](06-blockchain-solana/26-solana-basics/) | `m26-solana-basics` | 6 + bonus |
+| 6 | [27 Anchor Framework](06-blockchain-solana/27-anchor-framework/) | `m27-anchor-framework` | 4 + bonus |
+| 6 | [28 Smart Contracts](06-blockchain-solana/28-smart-contracts/) | `m28-smart-contracts` | 4 + bonus |
+| 6 | [29 NFTs & Tokens](06-blockchain-solana/29-nfts-tokens/) | `m29-nfts-tokens` | 4 + bonus |
+| 6 | [30 DeFi Protocols](06-blockchain-solana/30-defi-protocols/) | `m30-defi-protocols` | 5 + bonus |
+| 7 | [31 CLI Tools](07-systems-programming/31-cli-tools/) | `m31-cli-tools` | 4 + bonus |
+| 7 | [32 Network Programming](07-systems-programming/32-network-programming/) | `m32-network-programming` | 5 + bonus |
+| 7 | [33 Embedded Rust](07-systems-programming/33-embedded-rust/) | `m33-embedded-rust` | 5 + bonus |
+| 7 | [34 OS Concepts](07-systems-programming/34-os-concepts/) | `m34-os-concepts` | 5 + bonus |
+| 7 | [35 Memory Management](07-systems-programming/35-memory-management/) | `m35-memory-management` | 5 + bonus |
+| 8 | [36 Performance Optimization](08-advanced-topics/36-performance-optimization/) | `m36-performance-optimization` | 4 + bonus |
+| 8 | [37 WebAssembly](08-advanced-topics/37-wasm/) | `m37-wasm` | 4 + bonus |
+| 8 | [38 Procedural Macros](08-advanced-topics/38-proc-macros/) | `m38-proc-macros` | 4 + bonus |
+| 8 | [39 Compiler Internals](08-advanced-topics/39-compiler-internals/) | `m39-compiler-internals` | 4 + bonus |
+| 8 | [40 Contributing](08-advanced-topics/40-contributing/) | `m40-contributing` | 4 + bonus |
 
-Modules 08–11 and 13–25 had no exercise file originally; theirs were written
+Modules 08–11 and 13–40 had no exercise file originally; theirs were written
 in the same format. Where the original `exercises.md` files contained
 mistakes (wrong expected values, code that doesn't compile, outdated APIs), the
 module's README lists them under "Notes on `exercises.md`" and the solution
 uses the corrected version.
 
-### Still to be created
+### Phase 6 is a separate workspace
 
-Phases 6–8 (modules 26–40) have topic outlines in their phase READMEs. Use
-`EXERCISE_TEMPLATE.md` and the structure above to add them.
+Phase 6's Solana and Anchor dependencies need Rust 1.89, so
+`06-blockchain-solana/` is its own Cargo workspace. Run its commands from
+inside that directory. Its [GETTING_STARTED.md](06-blockchain-solana/GETTING_STARTED.md)
+also covers the optional on-chain (SBF) builds.
+
+A few modules have their own wrinkles:
+- **38**: the tests that use a macro are switched on per exercise
+  (`--features mine,ex1`), as in module 13.
+- **39**: the tests run your installed `rustc`.
+- **40**: Exercise 1 starts from complete, buggy code rather than
+  `todo!()`.
 
 ## Learning Paths
 

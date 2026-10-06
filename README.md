@@ -4,8 +4,8 @@ A comprehensive, structured learning path to master Rust programming, from funda
 
 ## Current Status
 
-Phases 1–5 have exercises, a reference solution and tests for every module.
-Phases 6–8 are topic outlines (each phase README lists its modules).
+All eight phases (40 modules) have exercises, a reference solution and tests
+for every module.
 
 | Module | Exercises | Runnable code | Status |
 |---|---|---|---|
@@ -34,21 +34,47 @@ Phases 6–8 are topic outlines (each phase README lists its modules).
 | 23 · Microservices | ✅ | ✅ | **Ready** — 17 tests |
 | 24 · Observability | ✅ | ✅ | **Ready** — 16 tests |
 | 25 · Service Mesh | ✅ | ✅ | **Ready** — 17 tests |
-| 26–40 · Phases 6–8 | outlines | — | Planned |
+| 26 · Solana Basics | ✅ | ✅ | **Ready** — 34 tests + 3 on-chain (Phase 6 workspace) |
+| 27 · Anchor Framework | ✅ | ✅ | **Ready** — 23 tests + 3 on-chain |
+| 28 · Smart Contracts | ✅ | ✅ | **Ready** — 28 tests + 4 on-chain |
+| 29 · NFTs & Tokens | ✅ | ✅ | **Ready** — 23 tests + 3 on-chain |
+| 30 · DeFi Protocols | ✅ | ✅ | **Ready** — 28 tests + 2 on-chain |
+| 31 · CLI Tools | ✅ | ✅ | **Ready** — 25 tests |
+| 32 · Network Programming | ✅ | ✅ | **Ready** — 25 tests |
+| 33 · Embedded Rust | ✅ | ✅ | **Ready** — 26 tests (`no_std`, mock hardware) |
+| 34 · OS Concepts | ✅ | ✅ | **Ready** — 22 tests (Unix only) |
+| 35 · Memory Management | ✅ | ✅ | **Ready** — 19 tests |
+| 36 · Performance Optimization | ✅ | ✅ | **Ready** — 13 tests + criterion benches |
+| 37 · WebAssembly | ✅ | ✅ | **Ready** — 13 tests (wasm builds optional) |
+| 38 · Procedural Macros | ✅ | ✅ | **Ready** — 17 tests |
+| 39 · Compiler Internals | ✅ | ✅ | **Ready** — 11 tests (uses your `rustc`) |
+| 40 · Contributing | ✅ | ✅ | **Ready** — 15 tests |
 | CRUD API project | ✅ | ✅ | Standalone app in `10-crud-api-project/` |
 
-`cargo test` at the repository root runs **567 tests** (unit, integration and
-doc tests across all five phases) against the reference solutions. Nothing
-needs Docker or a network connection — Phase 4's web services run on local
-ports, with SQLite and a mock OAuth2 provider; Phase 5 tests its operator
-against an in-memory API server and its gRPC, tracing and mTLS code on local
-ports; module 14 needs a C compiler, which
-every Rust install on macOS/Linux already has or can get with one command.
+`cargo test` at the repository root runs **753 tests** (unit, integration and
+doc tests for Phases 1–5, 7 and 8) against the reference solutions. Phase 6
+(Solana) is its own workspace -- its Solana/Anchor dependencies need a newer
+Rust -- so run it from inside `06-blockchain-solana/` (`cargo test` there: 149
+tests; see its [GETTING_STARTED.md](06-blockchain-solana/GETTING_STARTED.md)).
+
+Nothing needs Docker or a network connection:
+- Phase 4's web services run on local ports, with SQLite and a mock OAuth2
+  provider.
+- Phase 5 tests its operator against an in-memory API server, and its gRPC,
+  tracing and mTLS code on local ports.
+- Phase 6 runs programs in an in-process Solana runtime. Optionally, the
+  same tests run against real SBF builds with LiteSVM.
+- Phase 7 mocks the hardware.
+- Phase 8 drives your own `rustc`.
+
+Module 14 needs a C compiler, and module 34 needs a Unix system. Every
+Rust install on macOS or Linux already has a C compiler, or can get one
+with a single command.
 
 ## How the Code Is Organised
 
-The repository root is a single Cargo workspace. Each module in Phases 1–5
-looks like this:
+The repository root is a Cargo workspace (Phase 6 has its own, with the
+same layout). Each module looks like this:
 
 ```
 01-rust-fundamentals/03-ownership-borrowing/

@@ -1,0 +1,31 @@
+[package]
+name = "m30-defi-protocols"
+description = "YOUR WORKSPACE for 30-defi-protocols"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# cdylib: what `cargo build-sbf` turns into a deployable .so; lib: for tests.
+[lib]
+doctest = false
+crate-type = ["cdylib", "lib"]
+
+# Only for `cargo build-sbf`: which program gets the on-chain entrypoint.
+[features]
+amm = []
+oracle = []
+lending = []
+
+[dependencies]
+solana-program.workspace = true
+solana-system-interface.workspace = true
+spl-token-interface.workspace = true
+borsh.workspace = true
+thiserror.workspace = true
+
+[target.'cfg(not(target_os = "solana"))'.dependencies]
+solsim.workspace = true
+
+[lints]
+workspace = true

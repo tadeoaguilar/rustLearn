@@ -5,11 +5,10 @@ the remaining phases are in [ROADMAP.md](ROADMAP.md).
 
 ## What this repository is
 
-A Rust learning path in eight phases (40 modules) plus project ideas. Phases
-1–5 have, for every module, exercises, a reference solution, and tests that
-run against either the solution or the learner's own code. Phases 6–8 are
-topic outlines that are being built out in the same format. The layout
-mirrors the sibling repository `~/gitlab/netLearn` (.NET).
+A Rust learning path in eight phases (40 modules) plus project ideas. Every
+module has exercises, a reference solution, and tests that run against either
+the solution or the learner's own code. The layout mirrors the sibling
+repository `~/gitlab/netLearn` (.NET).
 
 ## Commands
 
@@ -29,10 +28,14 @@ Never run `cargo test --all-features` at the root: it enables `mine` in every
 tests crate and tests every unfinished skeleton (some modules then fail to
 *compile* by design — 11's `signatures`, 13's per-exercise features).
 
-`10-crud-api-project/` is excluded from the workspace; build it from inside
-its directory.
+`10-crud-api-project/` and `06-blockchain-solana/` are excluded from the root
+workspace; build them from inside their directories. Phase 6 is its own
+workspace (rust-version 1.89 for Anchor) with an in-process Solana runtime in
+`sim/`; `./build-sbf.sh` + `cargo test --features sbf` is the optional on-chain
+track (needs the Solana toolchain). The root also defines a `min-size` profile
+(module 36).
 
-## Module layout (Phases 1–5, and new modules)
+## Module layout
 
 ```
 <phase>/<NN-name>/
@@ -57,7 +60,9 @@ its directory.
 - Exercise crates set `[lib] doctest = false` (doc examples would hit `todo!()`).
 - Workspace members are globbed per phase in the root `Cargo.toml`. A glob
   that matches nothing is an error, so add a phase's globs once its first
-  module has all three crates.
+  module has all three crates. Proc-macro modules (13, 38) have extra crates
+  under `exercise/` and `solution/` (`derive/`, and in 38 `core/` holding the
+  testable expansions), matched by their own globs.
 - Shared dependency versions live in `[workspace.dependencies]`.
 
 ## Adding a module
@@ -103,6 +108,16 @@ do right on its own:
 - **Restoring provided bodies** from the solution by signature: if the same
   signature appears first in a trait declaration, slice by `impl` block instead.
 - Solution doc comments are copied; remove any that give the answer away.
+- **Const-generic braces in a return type** (`-> Foo<{ N }>`) confuse the
+  script: use a type alias.
+- **Global allocator hooks** must not `todo!()` (a panic inside `alloc`
+  aborts): forward to `System` in the skeleton.
+- **clap `#[arg(..)]` / Anchor `#[account(..)]` constraints** are part of the
+  answer: strip them from the exercise copy and leave a TODO.
+- **A skeleton can trip lints its solution doesn't** (`ptr_arg` on a
+  `&mut Vec` whose pushing body is `todo!()`): targeted `#[allow]` with a comment.
+- **Bench targets** (`[[bench]]`) aren't copied by the scaffold: keep them in
+  the solution only.
 
 ## Conventions
 
@@ -120,8 +135,11 @@ do right on its own:
   the module README and fix them in the solution and tests.
 - Verify claims about compiler errors and library APIs by compiling a scratch
   file or reading the crate source in `~/.cargo/registry/src` — several crates
-  here (SQLx 0.9, jsonwebtoken 11, argon2 0.6, utoipa 6, askama 0.16) are newer
-  than most documentation.
+  here (SQLx 0.9, jsonwebtoken 11, argon2 0.6, utoipa 6, askama 0.16, Anchor
+  1.2, ratatui 0.30) are newer than most documentation. SQLx 0.9 rejects
+  non-literal SQL unless wrapped in `AssertSqlSafe`.
+- Keep the 1.87 MSRV in mind: resolver 3 picks MSRV-compatible versions, and
+  newer std APIs (e.g. `as_chunks`, 1.88) aren't available outside Phase 6.
 
 ## Git
 

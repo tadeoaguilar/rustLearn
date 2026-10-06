@@ -1,0 +1,16 @@
+[package]
+name = "m35-memory-management-tests"
+description = "Tests for 35-memory-management -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m35-memory-management-tests                   -> tests ../solution
+# cargo test -p m35-memory-management-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m35-memory-management = { path = "../exercise" }
+m35-memory-management-solution = { path = "../solution" }

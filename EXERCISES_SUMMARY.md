@@ -4,7 +4,7 @@ This document provides an overview of all exercises across the 40 modules in the
 
 ## Status
 
-Phases 1–5 have exercises **and** runnable code: for every module an
+All eight phases have exercises **and** runnable code: for every module an
 `exercise/` crate to fill in, a `solution/` crate, and a `tests/` crate that
 checks either one. See [GETTING_STARTED.md](GETTING_STARTED.md) for the
 commands.
@@ -16,7 +16,9 @@ commands.
 | 3 · Advanced Rust (11–15) | ✅ | ✅ 116 tests + 12 macro doc tests |
 | 4 · Web Development (16–20) | ✅ | ✅ 84 tests |
 | 5 · Cloud Native (21–25) | ✅ | ✅ 89 tests |
-| 6–8 · Specialisations | topic outlines below | — |
+| 6 · Blockchain & Solana (26–30) | ✅ | ✅ 136 tests + 13 runtime tests (own workspace) + 15 on-chain |
+| 7 · Systems Programming (31–35) | ✅ | ✅ 117 tests |
+| 8 · Advanced Topics (36–40) | ✅ | ✅ 69 tests |
 
 ## Phase 1: Rust Fundamentals ✅
 
@@ -287,115 +289,124 @@ commands.
 - ✅ Load Balancing and Outlier Detection, and the sidecar (50 min)
 - ✅ Bonus: Mesh Manifests (25 min)
 
-## Phase 6: Blockchain & Solana
+## Phase 6: Blockchain & Solana ✅ *(all exercises written for this repo)*
 
 ### 26-solana-basics
-- Wallet setup
-- Account model
-- Transactions
-- PDAs
-- Deploy program
+- ✅ Wallets (30 min)
+- ✅ Funding, Transfers and Rent (40 min)
+- ✅ Hello, World (40 min)
+- ✅ Instruction Data and Account State (45 min)
+- ✅ The Notes Program -- PDAs (90 min)
+- ✅ Cross-Program Invocation -- a Vault (60 min)
+- ✅ Bonus: Reading Program Accounts (20 min)
 
 ### 27-anchor-framework
-- Anchor project setup
-- Account validation
-- Instruction handlers
-- Testing
-- IDL generation
+- ✅ Counter (45 min)
+- ✅ Voting (60 min)
+- ✅ Account Validation (60 min)
+- ✅ A Client for Tests (40 min)
+- ✅ Bonus: Growing Accounts with `realloc` (30 min)
 
 ### 28-smart-contracts
-- Counter program
-- Voting system
-- Escrow
-- Security patterns
-- Upgrades
+- ✅ A Multisig Wallet (120 min)
+- ✅ A Token Escrow (90 min)
+- ✅ Staking with Continuous Rewards (120 min)
+- ✅ A Security Review (90 min)
+- ✅ Bonus: Self-Governance (30 min)
 
 ### 29-nfts-tokens
-- Create token
-- Mint NFTs
-- Token metadata
-- ATAs
-- Token-2022
+- ✅ A Fungible Token (45 min)
+- ✅ NFTs and Metadata (120 min)
+- ✅ A Vending Machine (120 min)
+- ✅ NFT Staking (90 min)
+- ✅ Bonus: Compressed NFTs (45 min)
 
 ### 30-defi-protocols
-- Simple AMM
-- Liquidity pools
-- Lending protocol
-- Oracle integration
-- Staking
+- ✅ Constant-Product Maths (60 min)
+- ✅ The AMM Program (120 min)
+- ✅ Lending Maths (60 min)
+- ✅ Price Oracles (45 min)
+- ✅ A Lending Market (180 min)
+- ✅ Bonus: A Sandwich Attack (30 min)
 
-## Phase 7: Systems Programming
+## Phase 7: Systems Programming ✅ *(all exercises written for this repo)*
 
 ### 31-cli-tools
-- Argument parsing
-- TUI with ratatui
-- Progress bars
-- Signal handling
-- Shell completion
+- ✅ `minigrep` (60 min)
+- ✅ `logview` (60 min)
+- ✅ `tasks` (60 min)
+- ✅ A System Monitor TUI (90 min)
+- ✅ Bonus: Completions and Colour (20 min)
 
 ### 32-network-programming
-- TCP server/client
-- UDP communication
-- Protocol parsing
-- TLS with rustls
-- Proxy server
+- ✅ Echo Servers (45 min)
+- ✅ HTTP/1.1 from Scratch (180 min)
+- ✅ A Proxy and a Load Balancer (90 min)
+- ✅ A Framed Protocol -- Chat (150 min)
+- ✅ UDP Ping (60 min)
+- ✅ Bonus: DNS Messages (60 min)
 
 ### 33-embedded-rust
-- no_std basics
-- LED blink
-- I2C/SPI
-- Interrupts
-- Embassy async
+- ✅ Blink (45 min)
+- ✅ An I2C Sensor Driver (TMP102) (60 min)
+- ✅ A Serial Protocol -- COBS and CRC (90 min)
+- ✅ Memory-Mapped Registers (60 min)
+- ✅ Buttons and Interrupts (60 min)
+- ✅ Bonus: A Fixed-Point PID Controller (45 min)
 
 ### 34-os-concepts
-- Process management
-- IPC mechanisms
-- Memory mapping
-- System calls
-- Signals
+- ✅ A Process Supervisor (60 min)
+- ✅ A Small Shell (180 min)
+- ✅ Inter-Process Communication (90 min)
+- ✅ Shared Memory (120 min)
+- ✅ Signals and Resource Limits (60 min)
+- ✅ Bonus: A Parallel Job Runner (30 min)
 
 ### 35-memory-management
-- Custom allocator
-- Memory pools
-- Profiling
-- Cache optimization
-- NUMA awareness
+- ✅ A Bump Allocator (90 min)
+- ✅ A Slab and an Object Pool (60 min)
+- ✅ Counting Allocations (60 min)
+- ✅ Layout (45 min)
+- ✅ Cache-Friendly Layouts (60 min)
+- ✅ Bonus: A Tree in an Arena (30 min)
 
-## Phase 8: Advanced Topics
+## Phase 8: Advanced Topics ✅ *(all exercises written for this repo)*
 
 ### 36-performance-optimization
-- Profiling with flamegraph
-- Benchmarking
-- SIMD operations
-- LTO and PGO
-- Binary size reduction
+- ✅ Fix the Hot Path (90 min)
+- ✅ SIMD (120 min)
+- ✅ Cache-Friendly Matrix Multiplication (60 min)
+- ✅ Branches and Bounds Checks -- Measure First (45 min)
+- ✅ Reduce the Binary Size (20 min)
+- ✅ Bonus: SWAR (45 min)
 
 ### 37-wasm
-- WASM basics
-- wasm-bindgen
-- Yew application
-- JS interop
-- WASI
+- ✅ A Library for JavaScript (90 min)
+- ✅ Game of Life (60 min)
+- ✅ The JS Boundary (45 min)
+- ✅ WASI File Processing (45 min)
+- ✅ Bonus: Image Filters (30 min)
 
 ### 38-proc-macros
-- Builder derive
-- Custom serialization
-- Attribute macros
-- Function-like macros
-- Error reporting
+- ✅ A Serialization Derive (120 min)
+- ✅ An ORM Derive (120 min)
+- ✅ A DSL (120 min)
+- ✅ An Attribute Macro (90 min)
+- ✅ Bonus: `#[derive(EnumIter)]` (30 min)
 
 ### 39-compiler-internals
-- Reading MIR
-- Custom clippy lint
-- Understanding borrow checker
-- Contributing to rustc
+- ✅ A Lint Tool (90 min)
+- ✅ Reading MIR (60 min)
+- ✅ Borrow Checker Case Studies (90 min)
+- ✅ Desugaring (60 min)
+- ✅ Bonus: Unused Variables (60 min)
 
 ### 40-contributing
-- Finding projects
-- Writing PRs
-- Code review
-- RFC process
-- Community engagement
+- ✅ Fix Four Reported Bugs (90 min)
+- ✅ A Semver Checker (150 min)
+- ✅ Conventional Commits and the Changelog (90 min)
+- ✅ CI for a Rust Project (60 min)
+- ✅ Bonus: Commit Message Lint (30 min)
 
 ## Exercise Difficulty Guide
 

@@ -4,7 +4,7 @@ What has been built, the decisions behind it, and the plan for what's left.
 For *how* to work on the repository, see [CLAUDE.md](CLAUDE.md); for learners,
 start at [GETTING_STARTED.md](GETTING_STARTED.md).
 
-_Last updated: 2026-10-04._
+_Last updated: 2026-10-05._
 
 ## Status
 
@@ -15,14 +15,16 @@ _Last updated: 2026-10-04._
 | 3 · Advanced Rust | 11–15 | ✅ | ✅ | 128 |
 | 4 · Web Development | 16–20 | ✅ | ✅ | 84 |
 | 5 · Cloud Native | 21–25 | ✅ | ✅ | 89 |
-| 6 · Blockchain & Solana | 26–30 | outline | — | — |
-| 7 · Systems Programming | 31–35 | outline | — | — |
-| 8 · Advanced Topics | 36–40 | outline | — | — |
+| 6 · Blockchain & Solana | 26–30 | ✅ | ✅ (own workspace) | 136 + 13 runtime (+ 15 on-chain, optional) |
+| 7 · Systems Programming | 31–35 | ✅ | ✅ | 117 |
+| 8 · Advanced Topics | 36–40 | ✅ | ✅ | 69 |
 | 09-projects | — | ideas list | — | — |
 | 10-crud-api-project | — | — | ✅ standalone app | (its own) |
 
-`cargo test` at the root: **567 tests, all passing** (per phase: 123 + 143 + 128 + 84 + 89). `cargo clippy
---workspace --all-targets`: no warnings. `cargo fmt --all --check`: clean.
+`cargo test` at the root: **753 tests, all passing** (per phase: 123 + 143 + 128 + 84 + 89 + 117 + 69).
+`cargo clippy --workspace --all-targets`: no warnings. `cargo fmt --all --check`: clean.
+Phase 6, from `06-blockchain-solana/`: `cargo test` 149 tests; `./build-sbf.sh && cargo test
+--features sbf` adds 15 on-chain tests (needs the Solana toolchain).
 
 ### History
 
@@ -30,7 +32,8 @@ _Last updated: 2026-10-04._
 |---|---|
 | `0ff400a` | Phases 1–3: root workspace, 15 modules, exercise/solution/tests crates |
 | `f47ca8d` | Phase 4: modules 16–20 |
-| (next) | CLAUDE.md, ROADMAP.md, tools/; Phase 5: modules 21–25 |
+| `3fea4d0` | CLAUDE.md, ROADMAP.md, tools/; Phase 5: modules 21–25 |
+| (next) | Phases 6, 7 and 8: modules 26–40 |
 
 ## Decisions So Far
 
@@ -52,7 +55,7 @@ These apply to every module unless its README says otherwise.
    original `exercises.md` files are listed under "Notes on `exercises.md`" in
    each module README and fixed in the solution and tests.
 5. **Missing exercise files are written in the existing format** (modules
-   08–11 and 13–25 so far), each README saying so.
+   08–11 and 13–40), each README saying so.
 6. **Edition 2024, Rust 1.87+.** Skeletons and solutions follow 2024 rules
    (`unsafe extern`, `#[unsafe(no_mangle)]`, `impl Trait` capture rules).
 7. **Rocket** is covered in module 16's comparison and bonus but not
@@ -71,14 +74,12 @@ These apply to every module unless its README says otherwise.
 | 07 | the Fibonacci iterator overflows and panics at item 94; `partial_cmp().unwrap()` panics on NaN | 07 README |
 | 12 | `mpsc::Receiver` can't be cloned (the bonus doesn't compile); exercise 4 calls a live web API (replaced by an in-process mock); axum 0.7 / reqwest 0.11 versions and `:id` path syntax | 12 README |
 
-## Plan for the Remaining Phases
+## How the Later Phases Were Built
 
-Same structure and the same offline rule. For each module: what the code
-does, what's tested offline, and what's optional.
+Same structure and the same offline rule. What each phase chose (details in
+each module README):
 
-### Phase 5 · Cloud Native — done
-
-Built as planned, with these choices (details in each module README):
+### Phase 5 · Cloud Native
 
 - 21: the Dockerfiles and Compose file are checked by the module's own
   linter and Compose validator; **they were not built with Docker** (the
@@ -95,44 +96,42 @@ Built as planned, with these choices (details in each module README):
 
 ### Phase 6 · Blockchain & Solana
 
-Solana programs normally need the Solana toolchain (`cargo build-sbf`) and a
-validator. Plan: a **separate Cargo workspace** under `06-blockchain-solana/`
-(excluded from the root, so its very large dependency tree doesn't slow every
-other build), with:
-
-- program logic written so it's testable natively (instruction parsing,
-  account state transitions, invariants, security checks) — `cargo test`
-  works with a normal Rust install
-- integration tests with an in-process SVM (LiteSVM/Mollusk) and the Anchor
-  versions as the *optional* track for learners who install the toolchain
-- modules: 26 accounts/transactions/PDAs basics, 27 Anchor (counter, voting),
-  28 multisig + escrow + security review, 29 tokens/NFTs (SPL), 30 AMM +
-  lending math (constant product, interest rates, liquidation) with
-  property tests
+- A **separate workspace** (`06-blockchain-solana/`, Rust 1.89 for Anchor
+  1.2), excluded from the root.
+- **`sim/` (solsim)**: an in-process Solana runtime written for the phase.
+  It enforces the account rules (ownership, signers, writability, rent,
+  lamport balance), executes CPIs through the SDK's syscall stubs, and has
+  System, SPL Token (the real processor) and ATA builtins. Programs run
+  natively under `cargo test`, with no toolchain or validator.
+- **On-chain track** (optional): every program also builds with
+  `cargo build-sbf` (`build-sbf.sh`); the tests' `sbf` feature runs the
+  same scenarios on LiteSVM. Verified locally with solana-cli 3.1 /
+  platform-tools v1.52.
+- 26 raw programs (accounts, PDAs, CPI), 27 Anchor, 28 multisig + escrow +
+  staking + a security review, 29 tokens/NFTs (metadata modelled in the
+  program, compressed NFTs as a Merkle-tree bonus), 30 AMM and lending maths
+  with property tests.
 
 ### Phase 7 · Systems Programming
 
-All of it runs offline:
-
 | Module | Built around |
 |---|---|
-| 31 CLI tools | `clap` grep clone, a log viewer with filters, a task manager with a JSON store; a `ratatui` system monitor (rendering tested with ratatui's test backend) |
-| 32 Network programming | TCP echo, an HTTP/1.1 server from scratch, a TCP proxy, a framed custom protocol, UDP |
-| 33 Embedded | `no_std` + `embedded-hal` traits: blink, an I2C sensor driver tested with `embedded-hal-mock`, COBS + CRC framing; real boards optional |
-| 34 OS concepts | a process supervisor with restarts, a tiny shell (pipes, redirection), IPC over pipes and Unix sockets, shared memory via `memmap2` |
-| 35 Memory management | bump allocator, object pool/slab, SoA vs AoS cache experiment, allocation profiling with `dhat` |
+| 31 CLI tools | `clap` grep clone, a log viewer, a task manager with a JSON store; a `ratatui` system monitor tested with the test backend |
+| 32 Network programming | echo servers, HTTP/1.1 from scratch, a proxy + load balancer, a framed chat protocol, UDP ping; DNS messages bonus |
+| 33 Embedded | a `no_std` library on `embedded-hal` 1.0, tested with `embedded-hal-mock`; real boards optional and unrun |
+| 34 OS concepts | a supervisor, a shell with pipes and redirection, IPC, shared memory (`memmap2`), signals and rlimits (`nix`); Unix only |
+| 35 Memory management | bump allocator, slab/pool, a counting global allocator (instead of `dhat`), layout, AoS vs SoA |
 
 ### Phase 8 · Advanced Topics
 
 | Module | Built around |
 |---|---|
-| 36 Performance | profile-guided fixes to a slow program, SIMD (`std::arch` + portable fallbacks), cache blocking, release-profile binary-size reduction; criterion benchmarks |
-| 37 WASM | a `wasm-bindgen` library tested natively (wasm-pack optional), WASI file operations; Yew optional |
-| 38 Proc macros | beyond module 13: a serialization derive, an ORM-style derive generating SQL, a function-like DSL parsed with `syn` |
-| 39 Compiler internals | reading MIR/HIR output, borrow-checker case studies, a lint tool built on `syn` that walks real Rust files (dylint/clippy lints as an optional nightly track) |
-| 40 Contributing | a simulated open-source contribution: an issue, a failing test, a fix, docs and semver checks (`cargo-semver-checks`) |
+| 36 Performance | a hot path fixed by measurement, SIMD (SSE2/AVX2 with runtime detection + portable fallback), cache-blocked matmul, "measure first" on branches, a `min-size` profile (−39%); criterion benches |
+| 37 WASM | a `#[wasm_bindgen]` library tested natively; wasm-pack demo and WASI build documented but **not run** (no wasm target installed); Yew left as a pointer |
+| 38 Proc macros | `core/` (expansions on `proc_macro2`, unit-tested) + `derive/` (thin proc-macro crate): ToJson and ORM derives, a `state_machine!` DSL, `#[memoize]`; usage tests opt-in per exercise like module 13 |
+| 39 Compiler internals | a `syn` lint tool, a MIR reader, borrow-checker cases checked with rustc's JSON diagnostics, `for`/`?` desugaring verified by compiling and running both versions |
+| 40 Contributing | a buggy upstream crate to fix from four issues (the only exercise that isn't `todo!()`), a semver API-diff checker, Conventional Commits + Keep a Changelog, a CI workflow generator/reviewer |
 
 ### Not planned
 
 - `09-projects` stays a list of project ideas: they're meant to be built from scratch.
-- Phases are built in order 5 → 8; each lands as its own commit on `main`.

@@ -1,0 +1,19 @@
+[package]
+name = "m39-compiler-internals-tests"
+description = "Tests for 39-compiler-internals -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m39-compiler-internals-tests                   -> tests ../solution
+# cargo test -p m39-compiler-internals-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m39-compiler-internals = { path = "../exercise" }
+m39-compiler-internals-solution = { path = "../solution" }
+
+[dev-dependencies]
+serde_json.workspace = true

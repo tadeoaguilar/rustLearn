@@ -1,0 +1,32 @@
+[package]
+name = "m29-nfts-tokens-tests"
+description = "Tests for 29-nfts-tokens -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m29-nfts-tokens-tests                   -> tests ../solution
+# cargo test -p m29-nfts-tokens-tests --features mine   -> tests ../exercise (your code)
+mine = []
+# The optional on-chain track: also run the programs built by ../../build-sbf.sh
+# in LiteSVM. `--features sbf` (solution) or `--features sbf,mine` (yours).
+sbf = ["solsim/sbf"]
+
+[dependencies]
+m29-nfts-tokens = { path = "../exercise" }
+m29-nfts-tokens-solution = { path = "../solution" }
+
+[dev-dependencies]
+solsim.workspace = true
+solana-program.workspace = true
+solana-sdk-ids.workspace = true
+solana-system-interface.workspace = true
+solana-signer.workspace = true
+solana-keypair.workspace = true
+spl-token-interface.workspace = true
+borsh.workspace = true
+
+[lints]
+workspace = true

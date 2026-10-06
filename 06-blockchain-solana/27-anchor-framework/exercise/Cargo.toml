@@ -1,0 +1,37 @@
+[package]
+name = "m27-anchor-framework"
+description = "YOUR WORKSPACE for 27-anchor-framework"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# cdylib: what `cargo build-sbf` (or `anchor build`) turns into a .so; lib: for tests.
+[lib]
+doctest = false
+crate-type = ["cdylib", "lib"]
+
+# The features every Anchor program declares (`anchor init` generates them).
+# Tests enable `no-entrypoint`: two programs linked into one test binary
+# would otherwise both define the `entrypoint` symbol.
+[features]
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+idl-build = ["anchor-lang/idl-build"]
+custom-heap = []
+custom-panic = []
+anchor-debug = []
+
+[dependencies]
+anchor-lang.workspace = true
+
+# The client (Exercise 4) never runs on-chain.
+[target.'cfg(not(target_os = "solana"))'.dependencies]
+solsim.workspace = true
+solana-program.workspace = true
+
+[lints]
+workspace = true

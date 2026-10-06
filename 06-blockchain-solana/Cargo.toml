@@ -1,0 +1,80 @@
+# rustLearn Phase 6 -- its own Cargo workspace (excluded from the root one).
+#
+# Solana's crates are a large dependency tree that would slow down every build
+# of the other phases, and Anchor needs a newer Rust (1.89) than the rest of
+# the repository, so this phase builds separately. Run everything from THIS
+# directory:
+#
+#   cargo test                                            every module, against the solutions
+#   cargo run  -p m26-solana-basics-solution -- all       run a module's demo
+#   cargo test -p m26-solana-basics-tests --features mine test your own code
+#
+# Tests run the programs natively in `solsim` (sim/), an in-process runtime;
+# building them for the real Solana VM (`cargo build-sbf`) is optional, see
+# GETTING_STARTED.md.
+[workspace]
+resolver = "3"
+members = [
+    "sim",
+    "26-*/exercise",
+    "26-*/solution",
+    "26-*/tests",
+    "27-*/exercise",
+    "27-*/solution",
+    "27-*/tests",
+    "28-*/exercise",
+    "28-*/solution",
+    "28-*/tests",
+    "29-*/exercise",
+    "29-*/solution",
+    "29-*/tests",
+    "30-*/exercise",
+    "30-*/solution",
+    "30-*/tests",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.89"
+publish = false
+
+[workspace.dependencies]
+solsim = { path = "sim" }
+solana-program = "3"
+solana-sdk-ids = "3"
+# v2: the version Anchor 1.2 uses, so both kinds of program share one set of types
+solana-system-interface = { version = "2", features = ["bincode"] }
+anchor-lang = "1.2"
+# Programs and clients use the interface (instructions, state); only solsim
+# needs the program itself (spl-token's processor), to run it.
+spl-token-interface = "2"
+spl-token = { version = "9", features = ["no-entrypoint"] }
+borsh = { version = "1", features = ["derive"] }
+bytemuck = { version = "1", features = ["derive"] }
+thiserror = "2"
+serde_json = "1"
+# client side: keypairs and signatures (litesvm 0.10 uses the same versions)
+solana-keypair = "3"
+solana-signer = "3"
+solana-signature = { version = "3", features = ["verify"] }
+proptest = "1"
+
+# Anchor's CPIs go through `solana-invoke`, which panics off-chain. This copy
+# forwards them to the syscall stubs instead, so solsim can execute them.
+# On-chain builds are unaffected. See sim/README.md.
+[patch.crates-io]
+solana-invoke = { path = "sim/patches/solana-invoke" }
+
+# Programs are compiled for the Solana VM with `cfg(target_os = "solana")`.
+[workspace.lints.rust]
+# `entrypoint!` also checks the `custom-heap` / `custom-panic` features.
+unexpected_cfgs = { level = "warn", check-cfg = [
+    'cfg(target_os, values("solana"))',
+    'cfg(feature, values("custom-heap", "custom-panic"))',
+] }
+
+# Keep overflow checks in release (SBF) builds: a failed transaction is far
+# better than a balance that silently wrapped around.
+[profile.release]
+overflow-checks = true

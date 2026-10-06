@@ -1,0 +1,31 @@
+[package]
+name = "m27-anchor-framework-tests"
+description = "Tests for 27-anchor-framework -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m27-anchor-framework-tests                   -> tests ../solution
+# cargo test -p m27-anchor-framework-tests --features mine   -> tests ../exercise (your code)
+mine = []
+# The optional on-chain track: also run the program built by ../../build-sbf.sh
+# in LiteSVM. `--features sbf` (solution) or `--features sbf,mine` (yours).
+sbf = ["solsim/sbf"]
+
+[dependencies]
+# `no-entrypoint`: both programs are linked into the test binary, and each
+# would otherwise define the `entrypoint` symbol.
+m27-anchor-framework = { path = "../exercise", features = ["no-entrypoint"] }
+m27-anchor-framework-solution = { path = "../solution", features = ["no-entrypoint"] }
+
+[dev-dependencies]
+solsim.workspace = true
+anchor-lang.workspace = true
+solana-program.workspace = true
+solana-signer.workspace = true
+solana-keypair.workspace = true
+
+[lints]
+workspace = true

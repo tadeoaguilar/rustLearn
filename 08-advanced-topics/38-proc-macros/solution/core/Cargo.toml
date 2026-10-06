@@ -1,0 +1,14 @@
+[package]
+name = "m38-proc-macros-core-solution"
+description = "Macro expansion logic for 38-proc-macros (a normal library: testable)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# The expansions live here, on proc_macro2 types, so they can be unit-tested
+# (a proc-macro crate can only export macros). ../derive is a thin wrapper.
+[dependencies]
+syn.workspace = true
+quote.workspace = true
+proc-macro2.workspace = true

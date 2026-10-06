@@ -1,0 +1,16 @@
+[package]
+name = "m36-performance-optimization-tests"
+description = "Tests for 36-performance-optimization -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m36-performance-optimization-tests                   -> tests ../solution
+# cargo test -p m36-performance-optimization-tests --features mine   -> tests ../exercise (your code)
+mine = []
+
+[dependencies]
+m36-performance-optimization = { path = "../exercise" }
+m36-performance-optimization-solution = { path = "../solution" }

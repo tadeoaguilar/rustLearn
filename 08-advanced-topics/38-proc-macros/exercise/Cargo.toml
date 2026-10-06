@@ -1,0 +1,19 @@
+[package]
+name = "m38-proc-macros"
+description = "YOUR WORKSPACE for 38-proc-macros (the exercises are in core/)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# Doc examples would run against todo!() bodies, so they are off here.
+[lib]
+doctest = false
+
+[dependencies]
+m38-proc-macros-derive = { path = "derive" }
+# for main.rs, which prints your expansions
+m38-proc-macros-core = { path = "core" }
+syn.workspace = true
+quote.workspace = true
+proc-macro2.workspace = true

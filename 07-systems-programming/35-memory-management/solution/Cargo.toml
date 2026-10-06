@@ -1,0 +1,9 @@
+[package]
+name = "m35-memory-management-solution"
+description = "Reference solution for 35-memory-management"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]

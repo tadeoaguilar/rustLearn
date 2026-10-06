@@ -1,0 +1,11 @@
+[package]
+name = "m32-network-programming-solution"
+description = "Reference solution for 32-network-programming"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+tokio.workspace = true
+thiserror.workspace = true

@@ -1,0 +1,36 @@
+[package]
+name = "m38-proc-macros-tests"
+description = "Tests for 38-proc-macros -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m38-proc-macros-tests                        -> the solution (everything)
+# cargo test -p m38-proc-macros-tests --features mine        -> your core/ expansions (tests/src/expansion.rs)
+# cargo test -p m38-proc-macros-tests --features mine,ex1    -> ...plus the derive used on real types, Exercise 1
+# cargo test -p m38-proc-macros-tests --features mine,all    -> everything
+#
+# Tests that *use* a macro can't compile until the macro works, so in `mine`
+# mode each exercise's usage tests are opt-in.
+mine = []
+ex1 = []
+ex2 = []
+ex3 = []
+ex4 = []
+bonus = []
+all = ["ex1", "ex2", "ex3", "ex4", "bonus"]
+
+[dependencies]
+m38-proc-macros = { path = "../exercise" }
+m38-proc-macros-solution = { path = "../solution" }
+m38-proc-macros-core = { path = "../exercise/core" }
+m38-proc-macros-core-solution = { path = "../solution/core" }
+
+[dev-dependencies]
+syn.workspace = true
+quote.workspace = true
+proc-macro2.workspace = true
+sqlx.workspace = true
+tokio.workspace = true

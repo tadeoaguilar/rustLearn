@@ -1,0 +1,26 @@
+# A copy of solana-invoke 0.5.0 (MIT OR Apache-2.0) with one change, see
+# src/lib.rs and ../../README.md: off-chain, `invoke_signed_unchecked` forwards
+# to the syscall stubs (`solana_sysvar::program_stubs`) instead of panicking,
+# so Anchor's CPIs reach the `solsim` runtime in native tests. On-chain
+# (`target_os = "solana"`) the code is unchanged.
+[package]
+edition = "2021"
+name = "solana-invoke"
+version = "0.5.0"
+description = "solana-invoke 0.5.0, patched so off-chain CPIs reach the syscall stubs"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[lib]
+name = "solana_invoke"
+path = "src/lib.rs"
+
+[dependencies]
+solana-account-info = "3"
+solana-define-syscall = "3"
+solana-instruction = "3"
+solana-program-entrypoint = "3"
+solana-stable-layout = "3"
+
+[target.'cfg(not(target_os = "solana"))'.dependencies]
+solana-sysvar = "3"

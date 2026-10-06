@@ -186,6 +186,32 @@ This phase focuses on systems-level programming where Rust truly shines. You'll 
 
 ---
 
+## Running This Phase
+
+Every module has an `exercise/` crate (your code), a `solution/` crate and a
+`tests/` crate. From the repository root:
+
+```bash
+cargo run  -p m31-cli-tools-solution -- all              # a solution
+cargo run  -p m31-cli-tools -- 1                         # your code
+cargo test -p m31-cli-tools-tests --features mine        # test your code
+```
+
+| Module | Packages | Tests | Notes |
+|---|---|---|---|
+| 31 · CLI Tools | `m31-cli-tools[-solution\|-tests]` | 25 | the real tools: `-- grep`, `-- monitor`, ... |
+| 32 · Network Programming | `m32-network-programming[-solution\|-tests]` | 25 | local ports only; `-- http 8080 .` for curl |
+| 33 · Embedded Rust | `m33-embedded-rust[-solution\|-tests]` | 26 | `no_std` library, mock hardware |
+| 34 · OS Concepts | `m34-os-concepts[-solution\|-tests]` | 22 | Unix only; `-- shell` for an interactive shell |
+| 35 · Memory Management | `m35-memory-management[-solution\|-tests]` | 19 | timings: `--release` |
+
+None of the modules had an `exercises.md` originally; all five were written in
+the format of the earlier phases. **No test needs a network, a board or
+root**: servers bind to `127.0.0.1:0`, the embedded library runs against
+`embedded-hal-mock`, and the OS exercises use child processes, sockets and
+files in temporary directories. Module 34 needs a Unix (macOS or Linux);
+flashing a real microcontroller (module 33) is an optional, unverified step.
+
 ## Phase Completion Checklist
 
 - [ ] Built multiple CLI tools

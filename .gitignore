@@ -1,5 +1,6 @@
 # Rust build output
-/target/
+# every workspace's (the root, 06-blockchain-solana/, 10-crud-api-project/)
+target/
 **/*.rs.bk
 
 # Personal progress file (copied from PROGRESS.template.md)

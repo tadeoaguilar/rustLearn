@@ -1,0 +1,17 @@
+[package]
+name = "m38-proc-macros-derive-solution"
+description = "The procedural macros of 38-proc-macros: thin wrappers over ../core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# Compiled for the host and loaded by the compiler; it can export only macros.
+[lib]
+proc-macro = true
+
+[dependencies]
+m38-proc-macros-core-solution = { path = "../core" }
+syn.workspace = true
+quote.workspace = true
+proc-macro2.workspace = true

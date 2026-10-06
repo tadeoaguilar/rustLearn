@@ -217,6 +217,36 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 
 ---
 
+## Running This Phase
+
+Every module has an `exercise/` crate (your code), a `solution/` crate and a
+`tests/` crate. From the repository root:
+
+```bash
+cargo run  -p m36-performance-optimization-solution -- all     # a solution
+cargo run  -p m36-performance-optimization -- 1                # your code
+cargo test -p m36-performance-optimization-tests --features mine
+```
+
+| Module | Packages | Tests | Notes |
+|---|---|---|---|
+| 36 · Performance Optimization | `m36-performance-optimization[-solution\|-tests]` | 13 | timings: `--release`; `cargo bench -p m36-performance-optimization-solution` |
+| 37 · WebAssembly | `m37-wasm[-solution\|-tests]` | 13 | tested natively; browser and WASI builds optional |
+| 38 · Procedural Macros | `m38-proc-macros[-solution\|-tests]`, `-core`, `-derive` | 17 | usage tests opt-in per exercise: `--features mine,ex1` |
+| 39 · Compiler Internals | `m39-compiler-internals[-solution\|-tests]` | 11 | runs your installed `rustc` |
+| 40 · Contributing | `m40-contributing[-solution\|-tests]` | 15 | Ex 1 starts from buggy code, not `todo!()` |
+
+None of the modules had an `exercises.md` originally; all five were written in
+the format of the earlier phases. **Everything runs offline**:
+- module 37 tests its `#[wasm_bindgen]` library natively;
+- module 38's ORM runs its SQL on an in-memory SQLite;
+- module 39 drives the `rustc` that came with your toolchain.
+
+Optional steps are described in each module and were not run here:
+- building for `wasm32` and running in a browser or wasmtime;
+- writing a lint inside rust-clippy;
+- contributing upstream.
+
 ## Phase Completion Checklist
 
 - [ ] Optimized critical performance bottlenecks

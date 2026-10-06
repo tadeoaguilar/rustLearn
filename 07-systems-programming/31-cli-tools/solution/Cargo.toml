@@ -1,0 +1,18 @@
+[package]
+name = "m31-cli-tools-solution"
+description = "Reference solution for 31-cli-tools"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+clap.workspace = true
+clap_complete.workspace = true
+regex.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+ratatui.workspace = true
+sysinfo.workspace = true
+tempfile.workspace = true

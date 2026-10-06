@@ -1,0 +1,17 @@
+[package]
+name = "m36-performance-optimization-solution"
+description = "Reference solution for 36-performance-optimization"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+
+[dev-dependencies]
+criterion.workspace = true
+
+# Optional: `cargo bench -p m36-performance-optimization-solution`
+[[bench]]
+name = "perf"
+harness = false

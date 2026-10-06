@@ -1,0 +1,36 @@
+[package]
+name = "m28-smart-contracts"
+description = "YOUR WORKSPACE for 28-smart-contracts"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# cdylib: what `cargo build-sbf` turns into a deployable .so; lib: for tests.
+[lib]
+doctest = false
+crate-type = ["cdylib", "lib"]
+
+# Only for `cargo build-sbf`: which program gets the on-chain entrypoint.
+[features]
+multisig = []
+escrow = []
+staking = []
+bank = []
+bank-secure = []
+
+[dependencies]
+solana-program.workspace = true
+solana-system-interface.workspace = true
+spl-token-interface.workspace = true
+borsh.workspace = true
+thiserror.workspace = true
+
+[target.'cfg(not(target_os = "solana"))'.dependencies]
+solsim.workspace = true
+
+[target.'cfg(not(target_os = "solana"))'.dev-dependencies]
+proptest.workspace = true
+
+[lints]
+workspace = true

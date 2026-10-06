@@ -1,0 +1,33 @@
+[package]
+name = "solsim"
+description = "An in-process Solana runtime for native tests (rustLearn Phase 6 infrastructure)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+solana-program.workspace = true
+solana-sdk-ids.workspace = true
+spl-token.workspace = true
+spl-token-interface.workspace = true
+solana-system-interface.workspace = true
+base64 = "0.22"
+
+# The optional on-chain track: run the SBF builds in LiteSVM (`sbf` module).
+litesvm = { version = "0.10", optional = true }
+solana-keypair = { workspace = true, optional = true }
+solana-signer = { workspace = true, optional = true }
+solana-transaction = { version = "3", optional = true }
+solana-transaction-error = { version = "3", optional = true }
+solana-instruction-error = { version = "2", optional = true }
+
+[features]
+sbf = [
+    "dep:litesvm",
+    "dep:solana-keypair",
+    "dep:solana-signer",
+    "dep:solana-transaction",
+    "dep:solana-transaction-error",
+    "dep:solana-instruction-error",
+]

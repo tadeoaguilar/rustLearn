@@ -1,0 +1,32 @@
+[package]
+name = "m28-smart-contracts-tests"
+description = "Tests for 28-smart-contracts -- run against the solution or your own code"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+# cargo test -p m28-smart-contracts-tests                   -> tests ../solution
+# cargo test -p m28-smart-contracts-tests --features mine   -> tests ../exercise (your code)
+mine = []
+# The optional on-chain track: also run the programs built by ../../build-sbf.sh
+# in LiteSVM. `--features sbf` (solution) or `--features sbf,mine` (yours).
+sbf = ["solsim/sbf"]
+
+[dependencies]
+m28-smart-contracts = { path = "../exercise" }
+m28-smart-contracts-solution = { path = "../solution" }
+
+[dev-dependencies]
+solsim.workspace = true
+solana-program.workspace = true
+solana-system-interface.workspace = true
+solana-signer.workspace = true
+solana-keypair.workspace = true
+spl-token-interface.workspace = true
+borsh.workspace = true
+proptest.workspace = true
+
+[lints]
+workspace = true

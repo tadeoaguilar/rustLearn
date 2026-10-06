@@ -1,4 +1,4 @@
-# rustLearn -- one Cargo workspace for Phases 1-5 (Phase 6 has its own; see ROADMAP.md).
+# rustLearn -- one Cargo workspace for Phases 1-5 and 7-8 (Phase 6 has its own: 06-blockchain-solana/).
 #
 # Every module has three crates:
 #
@@ -28,10 +28,18 @@ members = [
     "05-cloud-native/*/exercise",
     "05-cloud-native/*/solution",
     "05-cloud-native/*/tests",
+    "07-systems-programming/*/exercise",
+    "07-systems-programming/*/solution",
+    "07-systems-programming/*/tests",
+    "08-advanced-topics/*/exercise",
+    "08-advanced-topics/*/solution",
+    "08-advanced-topics/*/tests",
+    "08-advanced-topics/*/*/core",
+    "08-advanced-topics/*/*/derive",
 ]
-# The CRUD project is a standalone application with its own Cargo.lock,
-# build it from inside its own directory.
-exclude = ["10-crud-api-project"]
+# The CRUD project is a standalone application with its own Cargo.lock, and
+# Phase 6 (Solana) is its own workspace; build each from inside its directory.
+exclude = ["10-crud-api-project", "06-blockchain-solana"]
 
 [workspace.package]
 version = "0.1.0"
@@ -98,6 +106,32 @@ rustls = { version = "0.23", default-features = false, features = ["ring", "std"
 tokio-rustls = { version = "0.26", default-features = false, features = ["ring", "tls12", "logging"] }
 rcgen = "0.14"
 x509-parser = "0.18"
+
+# Phase 7: systems programming
+clap = { version = "4", features = ["derive", "env"] }
+clap_complete = "4"
+regex = "1"
+ratatui = { version = "0.30", default-features = false, features = ["crossterm"] }
+sysinfo = "0.36"
+embedded-hal = "1"
+embedded-hal-mock = { version = "0.11", default-features = false, features = ["eh1"] }
+heapless = "0.9"
+nix = { version = "0.31", features = ["signal", "process", "resource"] }
+signal-hook = "0.4"
+memmap2 = "0.9"
+
+# Phase 8: advanced topics
+wasm-bindgen = "0.2"
+
+# Module 36: a profile for small binaries. Measure with
+#   cargo build --release -p <pkg>  vs  cargo build --profile min-size -p <pkg>
+[profile.min-size]
+inherits = "release"
+opt-level = "z"      # optimize for size
+lto = true           # whole-program optimization: drop unused code across crates
+codegen-units = 1    # fewer units: better optimization, slower builds
+panic = "abort"      # no unwinding tables or landing pads
+strip = true         # no symbols
 
 # Argon2 is deliberately slow; unoptimised (debug) it's ~10x slower still,
 # which makes module 19's tests crawl. Optimising just these dependencies

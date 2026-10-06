@@ -1,0 +1,10 @@
+[package]
+name = "m38-proc-macros-solution"
+description = "Reference solution for 38-proc-macros: the runtime traits, re-exporting the macros"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+m38-proc-macros-derive-solution = { path = "derive" }
